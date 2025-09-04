@@ -173,8 +173,8 @@ export default function Header({ onSearchClick, onCartClick }: HeaderProps) {
       {/* Main Navigation */}
       <div className="container mx-auto flex items-center justify-between py-3 px-6">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Siddhi Aura Stones Logo" className="h-10 w-auto" />
-          <span className="text-xl font-bold text-primary-dark font-serif">Siddhi Aura Stones</span>
+          <img src={logo} alt="Siddhi Divine Logo" className="h-10 w-auto" />
+          <span className="text-xl font-bold text-primary-dark font-serif">Siddhi Divine</span>
         </Link>
         
         {/* Desktop Menu */}

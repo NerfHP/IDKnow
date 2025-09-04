@@ -1,4 +1,4 @@
-# Divine Stack - A Full-Stack E-commerce & Service Platform
+# Siddhi Divine - A Full-Stack E-commerce & Service Platform
 
 This project is a complete, production-ready full-stack web application that emulates the public functionality and user experience of a spiritual e-commerce and service website. It is built with a modern, type-safe tech stack including React, Node.js, Express, Prisma, and TypeScript.
 
