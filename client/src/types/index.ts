@@ -1,0 +1,68 @@
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface AuthTokens {
+  access: {
+    token: string;
+    expires: string;
+  };
+  refresh: {
+    token: string;
+    expires: string;
+  };
+}
+
+export interface AuthContextType {
+  user: User | null;
+  tokens: AuthTokens | null;
+  login: (data: { user: User; tokens: AuthTokens }) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+}
+
+export type ContentType = 'PRODUCT' | 'SERVICE' | 'ARTICLE';
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  type: ContentType;
+  description?: string;
+}
+
+export interface Variant {
+  name: string;
+  priceModifier: number;
+}
+
+export interface ContentItem {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  content?: string | null;
+  price?: number | null;
+  images: string; // This remains a JSON string of image URLs
+  type: ContentType;
+  category: Category;
+  categoryId: string;
+
+  // --- NEW & EXPANDED FIELDS ---
+  salePrice?: number | null; // For showing discounted prices
+  vendor?: string;
+  sku?: string;
+  availability?: string;
+  attributes?: string; // For the short list of specs
+  variants?: string;
+  
+  // For the tabbed section
+  specifications?: string; // e.g., { "Ruling Planet": "Mars", "Weight": "2.5 gms" }
+  benefits?: string; // A list of benefits
+}
+
+export interface CartItem extends ContentItem {
+  quantity: number;
+}

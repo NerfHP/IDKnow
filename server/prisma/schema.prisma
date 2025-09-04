@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String?
+  type        String
+  items       ContentItem[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Self-relation for parent-child hierarchy
+  parentId    String?
+  parent      Category?     @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
+  children    Category[]    @relation("ParentChild")
+}
+
+model ContentItem {
+  id    String @id @default(cuid())
+  name  String
+  slug  String @unique
+  description String
+  content      String?
+  price        Float?
+  salePrice    Float?
+  images       String
+  type         String
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Optional fields
+  vendor         String?
+  sku            String?
+  availability   String?
+  attributes     String?
+  specifications String?
+  benefits       String?
+  variants       String?
+}

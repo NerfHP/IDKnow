@@ -1,0 +1,21 @@
+# -------- END FILE --------
+# -------- FILE: server/.gitignore --------
+```gitignore
+# Server-specific gitignore
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+
+# Env
+.env
+.env.*
+
+# DB
+prisma/dev.db
+prisma/dev.db-journal

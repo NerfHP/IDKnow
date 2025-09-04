@@ -1,0 +1,31 @@
+{
+  "name": "divine-stack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack application emulating divinehindu.in",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix client && npm install --prefix server",
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "start": "npm run start --prefix server",
+    "db:migrate": "npm run prisma:migrate --prefix server",
+    "db:seed": "npm run prisma:seed --prefix server",
+    "test": "npm test --prefix server && npm test --prefix client",
+    "lint": "npm run lint --prefix server && npm run lint --prefix client",
+    "format": "npm run format --prefix server && npm run format --prefix client"
+  },
+  "keywords": [
+    "react",
+    "express",
+    "prisma",
+    "typescript",
+    "full-stack"
+  ],
+  "author": "Gemini",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
