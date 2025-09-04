@@ -43,4 +43,4 @@ Follow these steps to get the project up and running locally.
 
 ```bash
 git clone <your-repo-url>
-cd divine-stack
+cd Siddhi-Divine
