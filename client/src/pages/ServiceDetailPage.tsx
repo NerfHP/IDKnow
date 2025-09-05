@@ -63,7 +63,7 @@ export default function ServiceDetailPage() {
           />
         </div>
         <div>
-          <h1 className="font-serif text-4xl font-bold">{service.name}</h1>
+          <h1 className="font-sans text-4xl font-bold">{service.name}</h1>
           <p className="mt-2 text-lg text-gray-600">{service.description}</p>
           {service.price && (
             <p className="mt-4 text-3xl font-bold text-primary-dark">

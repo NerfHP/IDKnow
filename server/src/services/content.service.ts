@@ -30,8 +30,17 @@ function getCategoryIds(category: any): string[] {
   return ids;
 }
 
-const queryItems = async (filter: { type?: string; categorySlug?: string }) => {
-  const { type, categorySlug } = filter;
+const queryItems = async (filter: { type?: string; categorySlug?: string; sortBy?: string }) => {
+  const { type, categorySlug, sortBy } = filter;
+
+  let orderBy = {};
+  if (sortBy === 'price-asc') {
+    orderBy = { salePrice: 'asc' };
+  } else if (sortBy === 'price-desc') {
+    orderBy = { salePrice: 'desc' };
+  } else if (sortBy === 'name-asc') {
+    orderBy = { name: 'asc' };
+  }
 
   if (categorySlug) {
     const parentCategory = await getCategoryWithChildren(categorySlug);
@@ -50,11 +59,12 @@ const queryItems = async (filter: { type?: string; categorySlug?: string }) => {
       include: {
         category: true,
       },
+      orderBy: orderBy,
     });
   }
 
   // Fallback for queries without a category slug
-  return prisma.contentItem.findMany({ where: { type }, include: { category: true } });
+  return prisma.contentItem.findMany({ where: { type }, include: { category: true }, orderBy: orderBy, });
 };
 
 

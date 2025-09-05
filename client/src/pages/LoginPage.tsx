@@ -52,7 +52,7 @@ export default function LoginPage() {
       <SEO title="Login" description="Log in to your Divine Path account." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
-          <h1 className="text-center font-serif text-4xl font-bold text-secondary">Login</h1>
+          <h1 className="text-center font-sans text-4xl font-bold text-secondary">Login</h1>
           <p className="mt-4 text-center text-gray-600">
             Welcome back! Access your account.
           </p>

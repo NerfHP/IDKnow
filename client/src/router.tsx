@@ -9,6 +9,7 @@ import ErrorPage from './pages/ErrorPage';
 
 // Lazy load pages for better performance
 const CategoryPage = React.lazy(() => import('./pages/CategoryPage'));
+const ProductsPage = React.lazy(() => import('./pages/ProductsPage'));
 const ProductDetailPage = React.lazy(() => import('./pages/ProductDetailPage'));
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
 const ServiceDetailPage = React.lazy(() => import('./pages/ServiceDetailPage'));
@@ -42,15 +43,22 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
 
-      // --- Main Route for All Category Pages ---
+      // --- Main Routes for Products & Categories ---
       {
-        path: 'products/:categorySlug',
-        element: <SuspenseWrapper><CategoryPage /></SuspenseWrapper>,
+        path: 'products',
+        children: [
+          {
+            index: true, // Handles the main /products page
+            element: <SuspenseWrapper><ProductsPage /></SuspenseWrapper>,
+          },
+          {
+            path: ':categorySlug', // Handles category pages, e.g., /products/bracelets
+            element: <SuspenseWrapper><CategoryPage /></SuspenseWrapper>,
+          },
+        ]
       },
-      
-      // --- Main Route for All Product Detail Pages ---
       {
-        path: 'product/:slug',
+        path: 'product/:slug', // Handles single product pages, e.g., /product/my-bracelet
         element: <SuspenseWrapper><ProductDetailPage /></SuspenseWrapper>,
       },
       

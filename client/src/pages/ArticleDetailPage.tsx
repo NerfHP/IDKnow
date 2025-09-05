@@ -54,7 +54,7 @@ export default function ArticleDetailPage() {
             { label: article.name },
           ]}
         />
-        <h1 className="mt-4 font-serif text-4xl font-bold">{article.name}</h1>
+        <h1 className="mt-4 font-sans text-4xl font-bold">{article.name}</h1>
         <p className="mt-2 text-lg text-gray-600">{article.description}</p>
         <img src={article.images[0]} alt={article.name} className="my-8 w-full rounded-lg object-cover shadow-lg"/>
         <div className="prose lg:prose-lg max-w-none">

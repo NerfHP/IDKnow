@@ -53,7 +53,7 @@ export default function RegisterPage() {
       <SEO title="Register" description="Create a new account with Divine Path." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
-          <h1 className="text-center font-serif text-4xl font-bold text-secondary">Create Account</h1>
+          <h1 className="text-center font-sans text-4xl font-bold text-secondary">Create Account</h1>
           <p className="mt-4 text-center text-gray-600">
             Join our community to start your journey.
           </p>

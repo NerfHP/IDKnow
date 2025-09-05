@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div className="bg-white py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-center font-serif text-4xl font-bold text-secondary">About Divine Path</h1>
+            <h1 className="text-center font-sans text-4xl font-bold text-secondary">About Divine Path</h1>
             <p className="mt-4 text-center text-lg text-gray-600">
               Your trusted partner on the journey to spiritual enlightenment and well-being.
             </p>

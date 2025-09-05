@@ -23,7 +23,7 @@ export default function AccountPage() {
       <SEO title="My Account" description="Manage your Divine Path account details." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-          <h1 className="font-serif text-4xl font-bold text-secondary">My Account</h1>
+          <h1 className="font-sans text-4xl font-bold text-secondary">My Account</h1>
           <div className="mt-6 border-t pt-6">
             <dl className="divide-y divide-gray-200">
               <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">

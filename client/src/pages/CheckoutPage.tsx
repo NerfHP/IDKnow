@@ -28,7 +28,7 @@ export default function CheckoutPage() {
       <SEO title="Checkout" description="Complete your purchase securely." />
       <div className="container mx-auto px-4 py-8">
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Cart', href: '/cart' }, { label: 'Checkout' }]} />
-        <h1 className="mt-4 font-serif text-4xl font-bold">Checkout</h1>
+        <h1 className="mt-4 font-sans text-4xl font-bold">Checkout</h1>
         
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">

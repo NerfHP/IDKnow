@@ -26,7 +26,7 @@ export default function BlogPage() {
     />
     <div className="container mx-auto px-4 py-8">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
-      <h1 className="mt-4 font-serif text-4xl font-bold">Our Blog</h1>
+      <h1 className="mt-4 font-sans text-4xl font-bold">Our Blog</h1>
       
       {isLoading && (
         <div className="flex h-64 items-center justify-center">
@@ -50,7 +50,7 @@ export default function BlogPage() {
                 </div>
                 <div className="md:col-span-2">
                   <p className="text-sm text-primary font-semibold">{article.category.name}</p>
-                  <h2 className="font-serif text-2xl font-bold mt-1 group-hover:text-primary-dark transition-colors">{article.name}</h2>
+                  <h2 className="font-sans text-2xl font-bold mt-1 group-hover:text-primary-dark transition-colors">{article.name}</h2>
                   <p className="text-gray-600 mt-2">{article.description}</p>
                 </div>
               </div>

@@ -11,7 +11,7 @@ export default function ErrorPage() {
     <>
       <SEO title="Error" description="An unexpected error has occurred." />
       <div id="error-page" className="flex min-h-screen flex-col items-center justify-center text-center">
-        <h1 className="font-serif text-4xl font-bold">Oops!</h1>
+        <h1 className="font-sans text-4xl font-bold">Oops!</h1>
         <p className="mt-4 text-lg">Sorry, an unexpected error has occurred.</p>
         <p className="mt-2 text-gray-500">
           <i>{error.statusText || error.message}</i>

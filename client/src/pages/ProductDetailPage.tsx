@@ -128,7 +128,7 @@ export default function ProductDetailPage() {
           </div>
           {/* Right Column: Product Details */}
           <div>
-            <h1 className="font-serif text-3xl font-bold">{product.name}</h1>
+            <h1 className="font-sans text-3xl font-bold">{product.name}</h1>
             <div className="flex items-center gap-2 mt-2 text-red-500 text-sm font-semibold">
               <Flame size={16} />
               <span>3 sold in last 17 hours</span>

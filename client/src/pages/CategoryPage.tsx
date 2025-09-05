@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
 import { ContentItem, Category } from '@/types';
@@ -8,27 +9,27 @@ import Alert from '@/components/shared/Alert';
 import Breadcrumbs from '@/components/shared/Breadcrumbs';
 import SEO from '@/components/shared/SEO';
 
-// The API will now return data in this shape
 interface CategoryPageData {
   category: Category;
   items: ContentItem[];
-  groupedItems: {
-    [categoryName: string]: ContentItem[]
-  };
+  groupedItems: { [categoryName: string]: ContentItem[] };
 }
 
-const fetchCategoryData = async (categorySlug: string) => {
-  // We will create this new API endpoint in the next step
-  const { data } = await api.get(`/content/category/${categorySlug}`);
+// Updated fetcher to include sorting
+const fetchCategoryData = async (categorySlug: string, sortBy: string) => {
+  const { data } = await api.get(`/content/category/${categorySlug}?sortBy=${sortBy}`);
   return data as CategoryPageData;
 };
 
 export default function CategoryPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
+  // --- NEW: State for sorting ---
+  const [sortBy, setSortBy] = useState('featured');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['categoryPage', categorySlug],
-    queryFn: () => fetchCategoryData(categorySlug!),
+    // --- NEW: Query key includes sort option ---
+    queryKey: ['categoryPage', categorySlug, sortBy],
+    queryFn: () => fetchCategoryData(categorySlug!, sortBy),
     enabled: !!categorySlug,
   });
 
@@ -52,18 +53,32 @@ export default function CategoryPage() {
       <div className="container mx-auto px-4 py-8">
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Products', href: '/products' }, { label: category.name }]} />
         <div className="mt-4 text-center border-b pb-4">
-            <h1 className="font-serif text-4xl font-bold">{category.name}</h1>
+            <h1 className="font-sans text-4xl font-bold">{category.name}</h1>
             {category.description && (
                 <p className="mt-2 text-gray-600 max-w-2xl mx-auto">{category.description}</p>
             )}
         </div>
         
+        {/* --- NEW: Sorting Dropdown --- */}
+        <div className="flex justify-end my-4">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary"
+          >
+            <option value="featured">Sort by: Featured</option>
+            <option value="price-asc">Sort by: Price: Low to High</option>
+            <option value="price-desc">Sort by: Price: High to Low</option>
+            <option value="name-asc">Sort by: Name: A-Z</option>
+          </select>
+        </div>
+
         {/* Render either grouped items or a single grid */}
         {hasGroups ? (
           <div className="space-y-12 mt-8">
             {Object.entries(groupedItems).map(([groupName, groupItems]) => (
               <section key={groupName}>
-                <h2 className="font-serif text-2xl font-bold mb-4">{groupName}</h2>
+                <h2 className="font-sans text-2xl font-bold mb-4">{groupName}</h2>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {groupItems.map(item => <Card key={item.id} item={item} />)}
                 </div>

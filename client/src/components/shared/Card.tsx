@@ -30,7 +30,7 @@ export default function Card({ item, className }: CardProps) {
     <Link
       to={linkTo}
       className={cn(
-        'group overflow-hidden rounded-lg border bg-white shadow-sm transition-all hover:shadow-lg flex flex-col',
+        'group overflow-hidden rounded-lg border bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col',
         className,
       )}
     >
@@ -47,7 +47,7 @@ export default function Card({ item, className }: CardProps) {
         )}
       </div>
       <div className="p-4 flex flex-col flex-grow">
-        <h3 className="flex-grow font-serif text-md font-semibold text-secondary min-h-[40px]">
+        <h3 className="flex-grow font-sans text-md font-semibold text-secondary min-h-[40px]">
           {item.name}
         </h3>
         <div className="mt-2">

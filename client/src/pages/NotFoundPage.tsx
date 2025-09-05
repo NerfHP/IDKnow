@@ -8,7 +8,7 @@ export default function NotFoundPage() {
       <SEO title="404 - Not Found" description="The page you are looking for does not exist." />
       <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
         <h1 className="text-6xl font-bold text-primary">404</h1>
-        <h2 className="mt-4 font-serif text-3xl font-bold text-secondary">
+        <h2 className="mt-4 font-sans text-3xl font-bold text-secondary">
           Page Not Found
         </h2>
         <p className="mt-2 text-gray-600">

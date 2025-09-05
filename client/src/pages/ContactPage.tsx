@@ -50,7 +50,7 @@ export default function ContactPage() {
       />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-xl mx-auto">
-          <h1 className="text-center font-serif text-4xl font-bold text-secondary">Contact Us</h1>
+          <h1 className="text-center font-sans text-4xl font-bold text-secondary">Contact Us</h1>
           <p className="mt-4 text-center text-lg text-gray-600">
             Have a question or need assistance? Fill out the form below.
           </p>

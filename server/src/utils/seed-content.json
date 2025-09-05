@@ -47,6 +47,9 @@
           { "name": "Gemstones", "slug": "gemstones", "type": "PRODUCT", "description": "Authentic, high-quality gemstones with astrological benefits." },
           { "name": "BirthStones", "slug": "birthstones", "type": "PRODUCT", "description": "Harness the specific energies of your birth month." }
       ]
+    },
+    {
+      "name": "Astrology", "slug": "astrology", "type": "SERVICE", "description": "Consult with our expert astrologers for guidance and remedies."
     }
   ],
   "items": [
@@ -125,6 +128,17 @@
       "content": "Neelam is a very powerful gemstone and is known for its rapid effects.",
       "price": 25000.00, "salePrice": 22500.00, "images": ["/images/products/gem-neelam.jpg"], "type": "PRODUCT",
       "categorySlug": "gemstones", "vendor": "Siddhi Divine", "sku": "GEM-NEE-01"
+    },
+    {
+      "name": "Kundali Prediction",
+      "slug": "kundali-prediction-online",
+      "description": "Book an online Kundali prediction session with expert astrologers.",
+      "content": "Our astrologers will prepare and analyze your Kundali (birth chart) based on your date, time, and place of birth. You will receive detailed insights into your personality, career, relationships, health, and future guidance in a live consultation.",
+      "price": 2100.00,
+      "salePrice": 1500.00,
+      "images": ["/images/services/kundali.jpg"],
+      "type": "SERVICE",
+      "categorySlug": "astrology"
     }
   ]
 }

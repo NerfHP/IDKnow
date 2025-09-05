@@ -25,8 +25,8 @@ export default function ProductsPage() {
       description="Browse our collection of high-quality spiritual products, including deity idols, puja items, and more."
     />
     <div className="container mx-auto px-4 py-8">
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} />
-      <h1 className="mt-4 font-serif text-4xl font-bold">Shop Products</h1>
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Collection' }]} />
+      <h1 className="text-center mt-4 font-sans text-4xl font-bold">Complete Collection 💯</h1>
       
       {isLoading && (
         <div className="flex h-64 items-center justify-center">
