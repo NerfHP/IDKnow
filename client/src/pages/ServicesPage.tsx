@@ -26,7 +26,7 @@ export default function ServicesPage() {
     />
     <div className="container mx-auto px-4 py-8">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
-      <h1 className="mt-4 font-serif text-4xl font-bold">Spiritual Services</h1>
+      <h1 className="mt-4 font-sans text-4xl font-bold">Spiritual Services</h1>
       
       {isLoading && (
         <div className="flex h-64 items-center justify-center">

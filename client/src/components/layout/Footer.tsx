@@ -65,17 +65,17 @@ export default function Footer() {
           <div className="space-y-4">
              <Link to="/" className="flex items-center gap-2">
                <img src={logo} alt="Siddhi Aura Logo" className="h-10 w-10 bg-white rounded-full p-1" />
-               <span className="text-xl font-bold font-serif">Siddhi Divine World</span>
+               <span className="text-xl font-bold font-sans">Siddhi Divine</span>
              </Link>
              <p className="text-sm text-gray-300">
-               Discover authentic spiritual and healing stones rooted in Vedic tradition at Siddhi Divine World.
+               Discover authentic spiritual and healing stones rooted in Vedic tradition at Siddhi Divine.
              </p>
              <p className="text-sm text-gray-300">
                Head Office – Sector-3, Madhav Puram, Meerut, Delhi Road, India
              </p>
              <p className="text-sm text-gray-300">
-               <a href="mailto:support@siddhidivineworld.com" className="text-sm text-gray-300 hover:text-primary transition">
-               support@siddhidivineworld.com
+               <a href="mailto:support@siddhidivine.com" className="text-sm text-gray-300 hover:text-primary transition">
+               support@siddhidivine.com
              </a>  
               </p>
            </div>
