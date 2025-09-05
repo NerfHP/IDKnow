@@ -11,7 +11,7 @@ import { formatCurrency } from '@/lib/utils';
 import { useCart } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
 import SEO from '@/components/shared/SEO';
-import { Heart, Minus, Plus, CheckCircle, Package, Target, Sparkles, Shield } from 'lucide-react';
+import { Heart, Share2, Minus, Plus, CheckCircle, Package, Target, Sparkles, Shield } from 'lucide-react';
 
 const fetchProductBySlug = async (slug: string) => {
   const { data } = await api.get(`/content/product/${slug}`);
@@ -40,6 +40,7 @@ export default function ProductDetailPage() {
   const imageArray: string[] = JSON.parse(product.images || '[]');
   const finalPrice = product.salePrice || product.price || 0;
   
+  // --- THIS IS THE FIX: Safely parse the data ---
   const specifications = product.specifications ? JSON.parse(product.specifications as unknown as string) : null;
   const benefits = product.benefits ? JSON.parse(product.benefits as unknown as string) : [];
   const howToUse = product.howToUse ? JSON.parse(product.howToUse as unknown as string) : [];
@@ -91,18 +92,24 @@ export default function ProductDetailPage() {
                    <button onClick={() => setQuantity(q => q + 1)} className="px-3 py-2 hover:bg-gray-50"><Plus size={14} /></button>
                 </div>
               </div>
-              
-              <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                 <Button size="lg" onClick={handleAddToCart} className="w-full sm:flex-grow">Add to Cart</Button>
-                 <Button size="lg" variant="secondary" className="w-full sm:flex-grow">Buy It Now</Button>
+              <div className="mt-6 space-y-4">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                      <Button size="lg" onClick={handleAddToCart} className="w-full flex-grow">Add to Cart</Button>
+                      <Button size="lg" variant="secondary" className="w-full flex-grow">Buy It Now</Button>
+                  </div>
+                  <div className="flex gap-3 justify-center">
+                      <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary"><Heart size={16}/> Add to Wishlist</button>
+                      <div className="border-l"></div>
+                      <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary"><Share2 size={16}/> Share</button>
+                  </div>
               </div>
             </div>
           </div>
           
-          {/* --- NEW DETAILED INFO SECTIONS --- */}
+          {/* Detailed Info Sections */}
           <div className="mt-16">
             {product.content && (
-              <div className="prose max-w-none text-gray-700">
+              <div className="prose max-w-none text-gray-700 mb-8">
                 <p>{product.content}</p>
               </div>
             )}

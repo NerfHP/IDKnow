@@ -55,91 +55,414 @@
   ],
   "items": [
     {
-      "name": "Pure Asthdhatu OM Namah Shivaay Bracelet", "slug": "pure-asthdhatu-om-namah-shivaay-bracelet",
+      "name": "Pure Asthdhatu OM Namah Shivaay Bracelet",
+      "slug": "pure-asthdhatu-om-namah-shivaay-bracelet",
       "description": "Asthdhatu (eight-metal) adjustable bracelet with OM Namah Shivaya charm; lab-certified spiritual accessory.",
-      "price": 1000, "salePrice": 400, "images": ["/images/products/bracelet-om.jpg"], "type": "PRODUCT",
-      "categorySlug": "bracelets", "sku": "SKR-PAsht-SB"
+      "content": "This sacred bracelet is crafted from Asthdhatu (a blend of eight metals) symbolizing balance and harmony. The OM Namah Shivaya charm enhances spiritual vibrations, making it an ideal daily wear accessory.",
+      "price": 1000,
+      "salePrice": 400,
+      "images": ["/images/products/bracelet-om.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "bracelets",
+      "vendor": "Siddhi Divine",
+      "sku": "SKR-PAsht-SB",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Asthdhatu (Eight Metals)",
+        "Charm": "OM Namah Shivaya",
+        "Adjustable": "Yes",
+        "Origin": "India"
+      },
+      "benefits": [
+        { "icon": "Sparkles", "text": "Balances spiritual and material energies." },
+        { "icon": "Heart", "text": "Promotes devotion and inner peace." },
+        { "icon": "Shield", "text": "Protects from negative influences." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Wear on your right wrist after purification with Ganga Jal." },
+        { "step": 2, "instruction": "Chant 'Om Namah Shivaya' while wearing it for maximum effect." }
+      ],
+      "packageContents": [
+        "One Asthdhatu OM Bracelet",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "Seven Chakra With White Sandal Wood Bracelet", "slug": "seven-chakra-with-white-sandal-wood-bracelet",
+      "name": "Seven Chakra With White Sandal Wood Bracelet",
+      "slug": "seven-chakra-with-white-sandal-wood-bracelet",
       "description": "Seven-chakra stones paired with white sandalwood beads; soothing aroma and balancing intent.",
-      "price": 1499, "salePrice": 1499, "images": ["/images/products/bracelet-chakra.jpg"], "type": "PRODUCT",
-      "categorySlug": "bracelets", "sku": "SKR-RCSW"
+      "content": "This bracelet combines the healing power of seven chakra stones with the calming fragrance of white sandalwood beads. It is designed to balance energy centers and promote harmony in mind and body.",
+      "price": 1499,
+      "salePrice": 1499,
+      "images": ["/images/products/bracelet-chakra.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "bracelets",
+      "vendor": "Siddhi Divine",
+      "sku": "SKR-RCSW",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Seven Chakra Stones + White Sandalwood",
+        "Adjustable": "Yes",
+        "Origin": "India"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Helps align and balance the chakras." },
+        { "icon": "Sparkles", "text": "Supports physical and emotional healing." },
+        { "icon": "Heart", "text": "Provides peace and positivity." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Wear on either wrist after cleansing with incense smoke." },
+        { "step": 2, "instruction": "Meditate focusing on the seven chakras." }
+      ],
+      "packageContents": [
+        "Seven Chakra Bracelet with Sandalwood",
+        "Certificate of Authenticity",
+        "Usage Guide"
+      ]
     },
     {
-      "name": "1 Mukhi Indonesian Rudraksha Bracelet", "slug": "1-mukhi-indonesian-rudraksha-bracelet",
+      "name": "1 Mukhi Indonesian Rudraksha Bracelet",
+      "slug": "1-mukhi-indonesian-rudraksha-bracelet",
       "description": "Adjustable bracelet with a single-face Indonesian rudraksha bead; promotes clarity and focus.",
-      "price": 4000, "salePrice": 4500, "images": ["/images/products/bracelet-rud-1.jpg"], "type": "PRODUCT",
-      "categorySlug": "rudraksha-bracelets", "sku": "SKN-R1B-RSC"
+      "content": "This bracelet is embedded with an authentic 1 Mukhi Indonesian Rudraksha, known for enhancing clarity, focus, and spiritual enlightenment.",
+      "price": 4000,
+      "salePrice": 4500,
+      "images": ["/images/products/bracelet-rud-1.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "rudraksha-bracelets",
+      "vendor": "Siddhi Divine",
+      "sku": "SKN-R1B-RSC",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "Indonesia",
+        "Bead Type": "1 Mukhi Rudraksha",
+        "Adjustable": "Yes",
+        "Ruling Deity": "Lord Shiva",
+        "Ruling Planet": "Sun",
+        "Beej Mantra": "Om Hreem Namah"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Sharpens focus and concentration." },
+        { "icon": "Sparkles", "text": "Supports spiritual awakening." },
+        { "icon": "Shield", "text": "Protects against negativity." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Purify with Ganga Jal and incense smoke." },
+        { "step": 2, "instruction": "Chant 'Om Hreem Namah' before wearing." }
+      ],
+      "packageContents": [
+        "One 1 Mukhi Rudraksha Bracelet",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "10 Mukhi Rudraksha Bracelet", "slug": "10-mukhi-rudraksha-bracelet-adjustable",
+      "name": "10 Mukhi Rudraksha Bracelet",
+      "slug": "10-mukhi-rudraksha-bracelet-adjustable",
       "description": "Adjustable ten-mukhi rudraksha bracelet; believed to protect from negative influences.",
-      "price": 6000, "salePrice": 6000, "images": ["/images/products/bracelet-rud-10.jpg"], "type": "PRODUCT",
-      "categorySlug": "rudraksha-bracelets", "sku": "SKN-R10B-Adj"
+      "content": "The 10 Mukhi Rudraksha represents Lord Vishnu. This bracelet shields the wearer from negative energies, psychic attacks, and evil influences.",
+      "price": 6000,
+      "salePrice": 6000,
+      "images": ["/images/products/bracelet-rud-10.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "rudraksha-bracelets",
+      "vendor": "Siddhi Divine",
+      "sku": "SKN-R10B-Adj",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "Nepal / Indonesia",
+        "Bead Type": "10 Mukhi Rudraksha",
+        "Adjustable": "Yes",
+        "Ruling Deity": "Lord Vishnu",
+        "Ruling Planet": "All Planets",
+        "Beej Mantra": "Om Hreem Namah"
+      },
+      "benefits": [
+        { "icon": "Shield", "text": "Protects from evil energies." },
+        { "icon": "Target", "text": "Removes obstacles and fears." },
+        { "icon": "Sparkles", "text": "Brings peace and harmony." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Wash with Ganga Jal before first use." },
+        { "step": 2, "instruction": "Chant 'Om Hreem Namah' 108 times." }
+      ],
+      "packageContents": [
+        "One 10 Mukhi Rudraksha Bracelet",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "1 Mukhi Rudraksha Locket with Silver Capping", "slug": "ek-mukhi-rudraksha-locket",
+      "name": "1 Mukhi Rudraksha Locket with Silver Capping",
+      "slug": "ek-mukhi-rudraksha-locket",
       "description": "Lab-certified 1 Mukhi Rudraksha pendant with silver capping; energized and supplied with certificate.",
-      "price": 4000, "salePrice": 4000, "images": ["/images/products/rud-nepal-1.jpg"], "type": "PRODUCT",
-      "categorySlug": "nepali-rudraksha", "sku": "SKN-R1-RSC"
+      "content": "The 1 Mukhi Rudraksha is the rarest and most powerful bead symbolizing Lord Shiva. This locket version with silver capping is easy to wear and radiates divine vibrations.",
+      "price": 4000,
+      "salePrice": 4000,
+      "images": ["/images/products/rud-nepal-1.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "nepali-rudraksha",
+      "vendor": "Siddhi Divine",
+      "sku": "SKN-R1-RSC",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "Nepal",
+        "Bead Type": "1 Mukhi Rudraksha",
+        "Capping": "Silver",
+        "Ruling Deity": "Lord Shiva",
+        "Ruling Planet": "Sun",
+        "Beej Mantra": "Om Hreem Namah"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Enhances focus and clarity." },
+        { "icon": "Sparkles", "text": "Promotes spiritual awakening." },
+        { "icon": "Shield", "text": "Protects against negative energies." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Sanctify with Ganga Jal before wearing." },
+        { "step": 2, "instruction": "Chant 'Om Hreem Namah' while wearing around the neck." }
+      ],
+      "packageContents": [
+        "One 1 Mukhi Rudraksha with Silver Capping",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "2 Mukhi Rudraksha (Indonesian)", "slug": "2-mukhi-rudraksha-indonesian",
+      "name": "2 Mukhi Rudraksha (Indonesian)",
+      "slug": "2-mukhi-rudraksha-indonesian",
       "description": "Indonesian 2-Mukhi bead; symbolizes harmony and balance. Options with or without silver capping.",
-      "price": 900, "salePrice": 1050, "images": ["/images/products/rud-indo-2.jpg"], "type": "PRODUCT",
-      "categorySlug": "indonesian-rudraksha", "sku": "SKI-R2-SC"
+      "content": "The 2 Mukhi Rudraksha represents Ardhanarishvara (union of Shiva and Parvati). It harmonizes relationships and brings unity in family life.",
+      "price": 900,
+      "salePrice": 1050,
+      "images": ["/images/products/rud-indo-2.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "indonesian-rudraksha",
+      "vendor": "Siddhi Divine",
+      "sku": "SKI-R2-SC",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "Indonesia",
+        "Bead Type": "2 Mukhi Rudraksha",
+        "Ruling Deity": "Ardhanarishvara",
+        "Ruling Planet": "Moon",
+        "Beej Mantra": "Om Namah"
+      },
+      "benefits": [
+        { "icon": "Heart", "text": "Improves harmony in relationships." },
+        { "icon": "Target", "text": "Balances emotional energies." },
+        { "icon": "Sparkles", "text": "Brings peace and unity." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Dip in raw milk or Ganga Jal before use." },
+        { "step": 2, "instruction": "Chant 'Om Namah' 108 times." }
+      ],
+      "packageContents": [
+        "One 2 Mukhi Indonesian Rudraksha",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "2 Mukhi Rudraksha (Nepali)", "slug": "2-mukhi-rudraksha-nepali-regular",
+      "name": "2 Mukhi Rudraksha (Nepali)",
+      "slug": "2-mukhi-rudraksha-nepali-regular",
       "description": "Natural Nepali 2-Mukhi bead; brown, unmounted; approx. 18.37×13.92×13.16mm.",
-      "price": 18500, "salePrice": 18500, "images": ["/images/products/rud-nepal-2.jpg"], "type": "PRODUCT",
-      "categorySlug": "nepali-rudraksha", "sku": "SKN-R2-RSC"
+      "content": "Nepali 2 Mukhi Rudraksha is a sacred bead known for strengthening partnerships and bringing peace in relationships.",
+      "price": 18500,
+      "salePrice": 18500,
+      "images": ["/images/products/rud-nepal-2.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "nepali-rudraksha",
+      "vendor": "Siddhi Divine",
+      "sku": "SKN-R2-RSC",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "Nepal",
+        "Bead Type": "2 Mukhi Rudraksha",
+        "Size": "Approx. 18.37×13.92×13.16mm",
+        "Ruling Deity": "Ardhanarishvara",
+        "Ruling Planet": "Moon",
+        "Beej Mantra": "Om Namah"
+      },
+      "benefits": [
+        { "icon": "Heart", "text": "Enhances love and unity." },
+        { "icon": "Shield", "text": "Removes misunderstandings." },
+        { "icon": "Sparkles", "text": "Brings mental peace." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Wash with Ganga Jal." },
+        { "step": 2, "instruction": "Wear with faith while chanting 'Om Namah'." }
+      ],
+      "packageContents": [
+        "One Nepali 2 Mukhi Rudraksha",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "3 Mukhi Rudraksha (Indonesian)", "slug": "3-mukhi-rudraksha-indonesian",
+      "name": "3 Mukhi Rudraksha (Indonesian)",
+      "slug": "3-mukhi-rudraksha-indonesian",
       "description": "Indonesian 3 Mukhi Rudraksha bead; symbolizes the fire element and helps release past karmas.",
-      "price": 1200, "salePrice": 1200, "images": ["/images/products/rud-indo-3.jpg"], "type": "PRODUCT",
-      "categorySlug": "indonesian-rudraksha", "sku": "SKI-R3"
+      "content": "The 3 Mukhi Rudraksha represents Lord Agni (Fire God). It burns past karmas and liberates the wearer from guilt and fear.",
+      "price": 1200,
+      "salePrice": 1200,
+      "images": ["/images/products/rud-indo-3.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "indonesian-rudraksha",
+      "vendor": "Siddhi Divine",
+      "sku": "SKI-R3",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "Indonesia",
+        "Bead Type": "3 Mukhi Rudraksha",
+        "Ruling Deity": "Agni Dev",
+        "Ruling Planet": "Mars",
+        "Beej Mantra": "Om Kleem Namah"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Removes past karmic debts." },
+        { "icon": "Shield", "text": "Destroys negative energies." },
+        { "icon": "Sparkles", "text": "Gives confidence and energy." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Sanctify with Ganga Jal." },
+        { "step": 2, "instruction": "Chant 'Om Kleem Namah' before wearing." }
+      ],
+      "packageContents": [
+        "One 3 Mukhi Indonesian Rudraksha",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
     },
     {
-      "name": "Original Karungali Malai", "slug": "original-karungali-malai",
+      "name": "Original Karungali Malai",
+      "slug": "original-karungali-malai",
       "description": "Authentic Ebony wood mala for protection against negative energy.",
-      "content": "Karungali Malai is known to absorb negative energy and radiate positive vibrations.",
-      "price": 1100.00, "salePrice": null, "images": ["/images/products/mala-karungali.jpg"], "type": "PRODUCT",
-      "categorySlug": "karungali-malai", "vendor": "Siddhi Divine", "sku": "MAL-KAR-01"
+      "content": "Karungali Malai is known to absorb negative energy and radiate positive vibrations. It is a traditional protective mala.",
+      "price": 1100.00,
+      "salePrice": null,
+      "images": ["/images/products/mala-karungali.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "karungali-malai",
+      "vendor": "Siddhi Divine",
+      "sku": "MAL-KAR-01",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Ebony Wood (Karungali)",
+        "Bead Count": "108+1",
+        "Origin": "India"
+      },
+      "benefits": [
+        { "icon": "Shield", "text": "Protects from negative forces." },
+        { "icon": "Heart", "text": "Promotes calmness and stability." },
+        { "icon": "Sparkles", "text": "Energizes the aura." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Use for chanting or wear around the neck." }
+      ],
+      "packageContents": [
+        "One Karungali Malai",
+        "Certificate of Authenticity"
+      ]
     },
     {
-      "name": "Rose Quartz Crystal Mala", "slug": "rose-quartz-crystal-mala",
+      "name": "Rose Quartz Crystal Mala",
+      "slug": "rose-quartz-crystal-mala",
       "description": "A beautiful mala made from Rose Quartz, the stone of universal love.",
-      "content": "It restores trust and harmony in relationships, encouraging unconditional love.",
-      "price": 950.00, "salePrice": 799.00, "images": ["/images/products/mala-rosequartz.jpg"], "type": "PRODUCT",
-      "categorySlug": "rose-quartz-mala", "vendor": "Siddhi Divine", "sku": "MAL-ROS-01"
+      "content": "Rose Quartz restores trust and harmony in relationships, encouraging unconditional love. Wearing this mala enhances compassion and emotional healing.",
+      "price": 950.00,
+      "salePrice": 799.00,
+      "images": ["/images/products/mala-rosequartz.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "rose-quartz-mala",
+      "vendor": "Siddhi Divine",
+      "sku": "MAL-ROS-01",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Rose Quartz",
+        "Bead Count": "108+1",
+        "Origin": "India"
+      },
+      "benefits": [
+        { "icon": "Heart", "text": "Attracts love and compassion." },
+        { "icon": "Sparkles", "text": "Heals emotional wounds." },
+        { "icon": "Target", "text": "Promotes harmony in relationships." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Wear as a mala or use for chanting mantras of love and harmony." }
+      ],
+      "packageContents": [
+        "One Rose Quartz Mala",
+        "Certificate of Authenticity"
+      ]
     },
     {
-      "name": "Seven Chakra Healing Stones Set", "slug": "seven-chakra-healing-stones-set",
+      "name": "Seven Chakra Healing Stones Set",
+      "slug": "seven-chakra-healing-stones-set",
       "description": "A complete set of seven stones to balance your chakras.",
-      "content": "Includes Amethyst, Lapis Lazuli, Blue Aventurine, Green Aventurine, Yellow Aventurine, Carnelian, and Red Jasper.",
-      "price": 1400.00, "salePrice": null, "images": ["/images/products/stones-chakra.jpg"], "type": "PRODUCT",
-      "categorySlug": "chakra-stones", "vendor": "Siddhi Divine", "sku": "STO-CHK-07"
+      "content": "Includes Amethyst, Lapis Lazuli, Blue Aventurine, Green Aventurine, Yellow Aventurine, Carnelian, and Red Jasper to harmonize and heal all seven chakras.",
+      "price": 1400.00,
+      "salePrice": null,
+      "images": ["/images/products/stones-chakra.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "chakra-stones",
+      "vendor": "Siddhi Divine",
+      "sku": "STO-CHK-07",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "7 Natural Crystals",
+        "Stones Included": "Amethyst, Lapis Lazuli, Blue Aventurine, Green Aventurine, Yellow Aventurine, Carnelian, Red Jasper",
+        "Origin": "India"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Balances all seven chakras." },
+        { "icon": "Sparkles", "text": "Supports healing and meditation." },
+        { "icon": "Heart", "text": "Brings harmony to mind, body, and soul." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Place stones on respective chakra positions during meditation." },
+        { "step": 2, "instruction": "Keep in living space for continuous energy balance." }
+      ],
+      "packageContents": [
+        "Seven Chakra Healing Stones Set",
+        "Certificate of Authenticity",
+        "Usage Guide"
+      ]
     },
     {
-      "name": "Natural Blue Sapphire (Neelam)", "slug": "natural-blue-sapphire-neelam",
+      "name": "Natural Blue Sapphire (Neelam)",
+      "slug": "natural-blue-sapphire-neelam",
       "description": "A certified gemstone for Saturn (Shani) to bring luck and fortune.",
-      "content": "Neelam is a very powerful gemstone and is known for its rapid effects.",
-      "price": 25000.00, "salePrice": 22500.00, "images": ["/images/products/gem-neelam.jpg"], "type": "PRODUCT",
-      "categorySlug": "gemstones", "vendor": "Siddhi Divine", "sku": "GEM-NEE-01"
-    },
-    {
-      "name": "Kundali Prediction",
-      "slug": "kundali-prediction-online",
-      "description": "Book an online Kundali prediction session with expert astrologers.",
-      "content": "Our astrologers will prepare and analyze your Kundali (birth chart) based on your date, time, and place of birth. You will receive detailed insights into your personality, career, relationships, health, and future guidance in a live consultation.",
-      "price": 2100.00,
-      "salePrice": 1500.00,
-      "images": ["/images/services/kundali.jpg"],
-      "type": "SERVICE",
-      "categorySlug": "astrology"
+      "content": "Blue Sapphire (Neelam) is one of the most powerful gemstones. It brings rapid results and is associated with the blessings of Lord Shani Dev.",
+      "price": 25000.00,
+      "salePrice": 22500.00,
+      "images": ["/images/products/gem-neelam.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "gemstones",
+      "vendor": "Siddhi Divine",
+      "sku": "GEM-NEE-01",
+      "availability": "In Stock",
+      "specifications": {
+        "Stone": "Natural Blue Sapphire",
+        "Planet": "Saturn (Shani)",
+        "Color": "Deep Blue",
+        "Origin": "Sri Lanka / India"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Brings prosperity and success." },
+        { "icon": "Sparkles", "text": "Removes obstacles and delays." },
+        { "icon": "Shield", "text": "Protects from misfortune." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Wear on a Saturday after Shani Puja." },
+        { "step": 2, "instruction": "Set in gold or silver and wear on middle finger." }
+      ],
+      "packageContents": [
+        "One Natural Blue Sapphire",
+        "Certificate of Authenticity",
+        "Energizing & Wearing Instructions"
+      ]
     },
     {
       "name": "Certified 1 Mukhi Rudraksha",
@@ -177,6 +500,17 @@
         "Certificate of Authenticity",
         "Puja and Energizing Instructions"
       ]
+    },
+    {
+      "name": "Kundali Prediction",
+      "slug": "kundali-prediction-online",
+      "description": "Book an online Kundali prediction session with expert astrologers.",
+      "content": "Our astrologers will prepare and analyze your Kundali (birth chart) based on your date, time, and place of birth. You will receive detailed insights into your personality, career, relationships, health, and future guidance in a live consultation.",
+      "price": 2100.00,
+      "salePrice": 1500.00,
+      "images": ["/images/services/kundali.jpg"],
+      "type": "SERVICE",
+      "categorySlug": "astrology"
     }
   ]
 }
