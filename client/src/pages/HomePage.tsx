@@ -7,7 +7,10 @@ import Alert from '@/components/shared/Alert';
 import Button from '@/components/shared/Button';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/shared/SEO';
-import { Gem, ShieldCheck, Globe, Zap } from 'lucide-react'; 
+import { Gem, ShieldCheck, Globe, Zap } from 'lucide-react';
+import { formatCurrency } from '@/lib/utils'; // Import formatCurrency
+import toast from 'react-hot-toast'; // Import toast
+import { useCart } from '@/hooks/useCart'; // Import useCart
 
 const fetchFeaturedItems = async () => {
   const [productsRes, servicesRes] = await Promise.all([
@@ -16,15 +19,21 @@ const fetchFeaturedItems = async () => {
   ]);
   return {
     products: (productsRes.data as ContentItem[]).slice(0, 4),
-    services: (servicesRes.data as ContentItem[]).slice(0, 2),
+    services: (servicesRes.data as ContentItem[]).slice(0, 2), // Still slice to 2 for homepage if multiple exist
   };
 };
 
 export default function HomePage() {
+  const { addToCart } = useCart(); // Use useCart hook
   const { data, isLoading, error } = useQuery({
     queryKey: ['featuredItems'],
     queryFn: fetchFeaturedItems,
   });
+
+  const handleAddToCart = (item: ContentItem) => {
+    addToCart(item);
+    toast.success(`${item.name} added to cart!`);
+  };
 
   return (
     <>
@@ -33,7 +42,7 @@ export default function HomePage() {
         description="Discover authentic spiritual products, book puja services, and find guidance with our expert astrology consultations. Your path to peace and well-being starts here."
       />
       
-      {/* --- REDESIGNED HERO SECTION --- */}
+      {/* Hero Section */}
       <section className="bg-secondary text-text-light text-center py-24">
         <div className="container mx-auto px-4">
           <h1 className="font-sans text-4xl font-bold tracking-tight md:text-6xl">
@@ -45,7 +54,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
             <Button asChild size="lg">
-              <Link to="/products/bracelets">Explore Products</Link>
+              <Link to="/products">Explore Products</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
               <Link to="/services">Book a Service</Link>
@@ -54,7 +63,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* --- WRAPPER FOR THE REST OF THE PAGE --- */}
+      {/* Wrapper for the rest of the page */}
       <div className="bg-background py-16 space-y-16">
         {/* Featured Products Section */}
         <section className="container mx-auto px-4">
@@ -84,7 +93,7 @@ export default function HomePage() {
           )}
         </section>
 
-        {/* Featured Services Section */}
+        {/* --- UPDATED "OUR SERVICES" SECTION --- */}
         <section className="container mx-auto px-4">
           <h2 className="text-center font-sans text-3xl font-bold text-text-main">
             Our Services
@@ -97,16 +106,51 @@ export default function HomePage() {
               <Spinner />
             </div>
           ) : (
-            data && (
-              <div className="mx-auto mt-8 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-                {data.services.map((item) => (
-                  <Card key={item.id} item={item} />
-                ))}
+            data && data.services.length > 0 && (
+              <div className="mt-8">
+                {data.services.length === 1 ? (
+                  // If there is only one service, show a large, detailed view
+                  <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg border">
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
+                      <div>
+                        <img 
+                          src={JSON.parse(data.services[0].images || '[]')[0]} 
+                          alt={data.services[0].name}
+                          className="w-full rounded-lg object-cover aspect-square"
+                        />
+                      </div>
+                      <div className="text-center md:text-left">
+                        <h3 className="font-sans text-2xl font-bold text-text-main">{data.services[0].name}</h3>
+                        <p className="text-gray-600 text-sm mt-2">{data.services[0].description}</p>
+                        <div className="flex items-center justify-center md:justify-start gap-2 mt-3">
+                          {data.services[0].salePrice && (
+                            <p className="text-2xl font-bold text-primary-dark">{formatCurrency(data.services[0].salePrice)}</p>
+                          )}
+                          <p className={`text-lg ${data.services[0].salePrice ? 'text-gray-500 line-through' : 'font-bold text-primary-dark'}`}>
+                            {formatCurrency(data.services[0].price)}
+                          </p>
+                        </div>
+                        <div className="mt-4 flex flex-col gap-2">
+                          <Button size="md" onClick={() => handleAddToCart(data.services[0])}>Add to Cart</Button>
+                          <Button asChild size="md" variant="outline">
+                            <Link to={`/services/${data.services[0].slug}`}>View Details</Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  // If more than one service, display the grid of cards
+                  <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+                    {data.services.map((item) => (
+                      <Card key={item.id} item={item} />
+                    ))}
+                  </div>
+                )}
               </div>
             )
           )}
         </section>
-
         {/* Trust Signals Section */}
         <section className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center border-t border-gray-200 pt-16">

@@ -59,8 +59,10 @@ export interface ContentItem {
   variants?: string;
   
   // For the tabbed section
-  specifications?: string; // e.g., { "Ruling Planet": "Mars", "Weight": "2.5 gms" }
-  benefits?: string; // A list of benefits
+  specifications?: Record<string, string>; // e.g., { "Ruling Planet": "Mars", "Weight": "2.5 gms" }
+  benefits?: { icon: string, text: string }[]; // A list of benefits
+  howToUse?: { step: number, instruction: string }[];
+  packageContents?: string[];
 }
 
 export interface CartItem extends ContentItem {

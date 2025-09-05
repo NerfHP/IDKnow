@@ -13,6 +13,7 @@
       "name": "Rudraksha", "slug": "rudraksha", "type": "PRODUCT", "description": "Explore authentic Rudraksha beads, known for their divine energy and healing properties.",
       "children": [
         { "name": "Nepali Rudraksha", "slug": "nepali-rudraksha", "type": "PRODUCT", "description": "High-quality, authentic Rudraksha beads sourced directly from Nepal." },
+        { "name": "1 Mukhi Rudraksha", "slug": "1-mukhi-rudraksha", "type": "PRODUCT", "description": "The rarest bead, representing Lord Shiva and enlightenment." },
         { "name": "Indonesian Rudraksha", "slug": "indonesian-rudraksha", "type": "PRODUCT", "description": "Smaller, potent Rudraksha beads sourced directly from Indonesia." },
         { "name": "Gauri Shanker Rudraksha", "slug": "gauri-shanker-rudraksha", "type": "PRODUCT", "description": "Represents the divine union of Shiva and Parvati for family harmony." },
         { "name": "Garbh Gauri Rudraksha", "slug": "garbh-gauri-rudraksha", "type": "PRODUCT", "description": "Strengthens the bond between mother and child." },
@@ -139,6 +140,43 @@
       "images": ["/images/services/kundali.jpg"],
       "type": "SERVICE",
       "categorySlug": "astrology"
+    },
+    {
+      "name": "Certified 1 Mukhi Rudraksha",
+      "slug": "1-mukhi-rudraksha",
+      "description": "The most powerful and auspicious bead, a divine symbol of Lord Shiva, bringing immense peace, focus, and spiritual enlightenment.",
+      "content": "The 1 Mukhi Rudraksha is the king of all beads and is a direct manifestation of Lord Shiva. It is believed to destroy all sins and lead the wearer on the path of liberation. This half-moon shaped bead is sourced from India and is lab-certified for 100% authenticity.",
+      "price": 3100.00,
+      "salePrice": 2500.00,
+      "images": "[\"/images/products/1-mukhi.jpg\"]",
+      "type": "PRODUCT",
+      "categorySlug": "1-mukhi-rudraksha",
+      "vendor": "Siddhi Divine",
+      "sku": "SDR-RUD-01",
+      "availability": "In Stock",
+      "specifications": {
+        "Origin": "India / Indonesia",
+        "Shape": "Half Moon / Cashew Nut",
+        "Ruling Deity": "Lord Shiva",
+        "Ruling Planet": "Sun",
+        "Beej Mantra": "Om Hreem Namah"
+      },
+      "benefits": [
+        { "icon": "Target", "text": "Enhances concentration and focus." },
+        { "icon": "Sparkles", "text": "Brings peace of mind and spiritual growth." },
+        { "icon": "Heart", "text": "Aids in meditating and reaching higher consciousness." },
+        { "icon": "Shield", "text": "Protects from negative energies and thoughts." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Purify the Rudraksha with Ganga Jal (holy water)." },
+        { "step": 2, "instruction": "Offer prayers to Lord Shiva and chant the Beej Mantra 'Om Hreem Namah' 108 times." },
+        { "step": 3, "instruction": "The bead can now be worn as a pendant or kept at your place of worship." }
+      ],
+      "packageContents": [
+        "One Certified 1 Mukhi Rudraksha",
+        "Certificate of Authenticity",
+        "Puja and Energizing Instructions"
+      ]
     }
   ]
 }
