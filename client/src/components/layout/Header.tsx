@@ -52,11 +52,21 @@ interface HeaderProps {
 // --- Menu Data ---
 const rudrakshaSubItems = Array.from({ length: 14 }, (_, i) => ({
   name: `${i + 1} Mukhi`,
-  path: `/rudraksha/${i + 1}-mukhi`,
-  icon: `/path/to/your/icons/${i + 1}-mukhi.png`, // Placeholder path
+  path: `/products/${i + 1}-mukhi-rudraksha`, // CORRECTED PATH
+  icon: `/rudraksha/${i + 1}-mukhi.png`, // Placeholder path
 }));
 
 const menuItems: MenuItem[] = [
+  {
+    name: 'Yantras',
+    path: '/products/yantras', // CORRECTED PATH
+    subItems: [
+      { name: 'Shree Yantra', path: '/products/yantras/shree' },
+      { name: 'Maha Lakshmi Yantra', path: '/products/yantras/lakshmi' },
+      { name: 'Kuber Yantra', path: '/products/yantras/kuber' },
+      { name: 'Navgraha Yantra', path: '/products/yantras/navgraha' },
+    ],
+  },
   {
     name: 'Bracelets',
     path: '/products/bracelets', // CORRECTED PATH
@@ -73,12 +83,13 @@ const menuItems: MenuItem[] = [
     subItems:[
       ...rudrakshaSubItems,
       // This is a category that is also a single product
-      { name: '3 Mukhi Rudraksha', 
-        path: '/products/3-mukhi-rudraksha',
+      { name: 'Gauri Shanker Rudraksha',
+        path: '/products/gauri-shanker-rudraksha', // Links directly to a PRODUCT page
+        isSingleProduct: true 
       },
       { 
         name: 'Ganesh Rudraksha',
-        path: '/product/ganesh-rudraksha', // Links directly to a PRODUCT page
+        path: '/products/ganesh-rudraksha', // Links directly to a PRODUCT page
         isSingleProduct: true 
       },
     ],

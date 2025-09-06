@@ -42,10 +42,10 @@ model ContentItem {
   salePrice    Float?
   images       String
   type         String
-  categoryId   String
-  category     Category @relation(fields: [categoryId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  categories Category[]
 
   // Optional fields
   vendor         String?

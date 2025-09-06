@@ -9,7 +9,7 @@ interface SEOProps {
 }
 
 export default function SEO({ title, description, name, type, imageUrl }: SEOProps) {
-  const fullTitle = `${title} | Divine Path`;
+  const fullTitle = `${title} | Siddhi Divine`;
 
   return (
     <Helmet>
@@ -26,7 +26,7 @@ export default function SEO({ title, description, name, type, imageUrl }: SEOPro
       {/* End Open Graph tags */}
 
       {/* Twitter tags */}
-      <meta name="twitter:creator" content={name || 'DivinePath'} />
+      <meta name="twitter:creator" content={name || 'SiddhiDivine'} />
       <meta name="twitter:card" content={type || 'summary_large_image'} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />

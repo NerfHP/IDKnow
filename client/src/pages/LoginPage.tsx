@@ -49,7 +49,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <SEO title="Login" description="Log in to your Divine Path account." />
+      <SEO title="Login" description="Log in to your Siddhi Divine account." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
           <h1 className="text-center font-sans text-4xl font-bold text-secondary">Login</h1>

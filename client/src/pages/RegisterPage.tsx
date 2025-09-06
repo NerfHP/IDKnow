@@ -50,7 +50,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      <SEO title="Register" description="Create a new account with Divine Path." />
+      <SEO title="Register" description="Create a new account with Siddhi Divine." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
           <h1 className="text-center font-sans text-4xl font-bold text-secondary">Create Account</h1>

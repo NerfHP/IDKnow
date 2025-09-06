@@ -1,7 +1,22 @@
 {
   "categories": [
     {
-      "name": "Bracelets", "slug": "bracelets", "type": "PRODUCT", "description": "Handcrafted spiritual bracelets made from authentic Rudraksha and healing crystals.",
+      "name": "Yantras",
+      "slug": "yantras",
+      "type": "PRODUCT",
+      "description": "Sacred geometric instruments that attract divine energies, prosperity, and spiritual balance.",
+      "children": [
+        {"name": "Shree Yantra","slug": "shree-yantra","type": "PRODUCT","description": "The most powerful yantra, representing the cosmos and divine feminine energy, for wealth, harmony, and spiritual growth."},
+        {"name": "Maha Lakshmi Yantra","slug": "maha-lakshmi-yantra","type": "PRODUCT","description": "Dedicated to Goddess Lakshmi, this yantra attracts prosperity, fortune, and abundance."},
+        {"name": "Kuber Yantra","slug": "kuber-yantra","type": "PRODUCT","description": "Sacred yantra of Lord Kuber, the god of wealth, for financial stability and material success."},
+        {"name": "Navgraha Yantra","slug": "navgraha-yantra","type": "PRODUCT","description": "A yantra harmonizing the energies of the nine planets to remove obstacles and balance cosmic influences."}
+      ]
+    },
+    {
+      "name": "Bracelets", 
+      "slug": "bracelets", 
+      "type": "PRODUCT", 
+      "description": "Handcrafted spiritual bracelets made from authentic Rudraksha and healing crystals.",
       "children": [
         { "name": "Rudraksha Bracelets", "slug": "rudraksha-bracelets", "type": "PRODUCT", "description": "Bracelets with authentic Rudraksha beads for peace and protection." },
         { "name": "Crystal Bracelets", "slug": "crystal-bracelets", "type": "PRODUCT", "description": "Bracelets featuring powerful healing crystals to balance your energy." },
@@ -10,7 +25,10 @@
       ]
     },
     {
-      "name": "Rudraksha", "slug": "rudraksha", "type": "PRODUCT", "description": "Explore authentic Rudraksha beads, known for their divine energy and healing properties.",
+      "name": "Rudraksha", 
+      "slug": "rudraksha", 
+      "type": "PRODUCT", 
+      "description": "Explore authentic Rudraksha beads, known for their divine energy and healing properties.",
       "children": [
         { "name": "Nepali Rudraksha", "slug": "nepali-rudraksha", "type": "PRODUCT", "description": "High-quality, authentic Rudraksha beads sourced directly from Nepal." },
         { "name": "1 Mukhi Rudraksha", "slug": "1-mukhi-rudraksha", "type": "PRODUCT", "description": "The rarest bead, representing Lord Shiva and enlightenment." },
@@ -21,7 +39,10 @@
       ]
     },
     {
-      "name": "Mala", "slug": "mala", "type": "PRODUCT", "description": "Traditional 108-bead malas for japa, meditation, and spiritual practice.",
+      "name": "Mala", 
+      "slug": "mala", 
+      "type": "PRODUCT", 
+      "description": "Traditional 108-bead malas for japa, meditation, and spiritual practice.",
       "children": [
           { "name": "Karungali Malai", "slug": "karungali-malai", "type": "PRODUCT", "description": "Authentic Ebony wood mala for protection against negative energy." },
           { "name": "Rudraksha Mala", "slug": "rudraksha-mala", "type": "PRODUCT", "description": "Classic malas for discipline and focus during meditation." },
@@ -35,7 +56,10 @@
       ]
     },
     {
-      "name": "Aura Stones", "slug": "aura-stones", "type": "PRODUCT", "description": "Cleanse, balance, and strengthen your aura with our curated selection of powerful stones.",
+      "name": "Aura Stones", 
+      "slug": "aura-stones", 
+      "type": "PRODUCT", 
+      "description": "Cleanse, balance, and strengthen your aura with our curated selection of powerful stones.",
       "children": [
           { "name": "Healing Stones", "slug": "healing-stones", "type": "PRODUCT", "description": "Natural stones chosen for their ability to promote well-being." },
           { "name": "Chakra Stones", "slug": "chakra-stones", "type": "PRODUCT", "description": "Align and activate your energy centers with our chakra stone sets." },
@@ -43,7 +67,10 @@
       ]
     },
     {
-      "name": "Astro Stone", "slug": "astro-stone", "type": "PRODUCT", "description": "Unlock your destiny with powerful astrological stones.",
+      "name": "Astro Stone", 
+      "slug": "astro-stone", 
+      "type": "PRODUCT", 
+      "description": "Unlock your destiny with powerful astrological stones.",
       "children": [
           { "name": "Gemstones", "slug": "gemstones", "type": "PRODUCT", "description": "Authentic, high-quality gemstones with astrological benefits." },
           { "name": "BirthStones", "slug": "birthstones", "type": "PRODUCT", "description": "Harness the specific energies of your birth month." }
@@ -54,6 +81,142 @@
     }
   ],
   "items": [
+    {
+      "name": "Shree Yantra - Energized Copper Plate",
+      "slug": "shree-yantra-copper",
+      "description": "Energized Shree Yantra crafted on pure copper plate for prosperity, harmony, and spiritual awakening.",
+      "content": "The Shree Yantra is considered the king of all yantras, representing cosmic energy and divine feminine power. Crafted on pure copper, it attracts wealth, peace, and spiritual growth when placed in your home or workspace.",
+      "price": 2500,
+      "salePrice": 1500,
+      "images": ["/images/products/shree-yantra.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "yantras",
+      "vendor": "Siddhi Divine",
+      "sku": "YAN-SHR-COP",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Pure Copper",
+        "Size": "6 x 6 inches",
+        "Origin": "India",
+        "Energized": "Yes"
+      },
+      "benefits": [
+        { "icon": "Sparkles", "text": "Attracts wealth and abundance." },
+        { "icon": "Heart", "text": "Brings harmony in relationships." },
+        { "icon": "Sun", "text": "Enhances spiritual growth." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Place in the East or North-East direction of your home or office." },
+        { "step": 2, "instruction": "Worship daily with incense and fresh flowers." }
+      ],
+      "packageContents": [
+        "One Energized Copper Shree Yantra",
+        "Certificate of Authenticity",
+        "Worship Instructions"
+      ]
+    },
+    {
+      "name": "Maha Lakshmi Yantra - Gold Plated",
+      "slug": "maha-lakshmi-yantra-gold",
+      "description": "Gold-plated Maha Lakshmi Yantra for attracting wealth, prosperity, and abundance.",
+      "content": "Dedicated to Goddess Lakshmi, this gold-plated Maha Lakshmi Yantra is a sacred instrument that helps in attracting prosperity and financial stability. It is energized with powerful mantras to enhance its spiritual vibrations.",
+      "price": 1800,
+      "salePrice": 1200,
+      "images": ["/images/products/maha-lakshmi-yantra.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "yantras",
+      "vendor": "Siddhi Divine",
+      "sku": "YAN-LAK-GP",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Gold Plated Copper",
+        "Size": "4 x 4 inches",
+        "Origin": "India",
+        "Energized": "Yes"
+      },
+      "benefits": [
+        { "icon": "Coins", "text": "Invites wealth and prosperity." },
+        { "icon": "Shield", "text": "Protects from financial troubles." },
+        { "icon": "Sparkles", "text": "Brings abundance in life." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Place in your puja room or cash box for maximum benefit." },
+        { "step": 2, "instruction": "Chant 'Om Shreem Mahalakshmyei Namah' daily while worshipping." }
+      ],
+      "packageContents": [
+        "One Gold-Plated Maha Lakshmi Yantra",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
+    },
+    {
+      "name": "Kuber Yantra - Brass Plate",
+      "slug": "kuber-yantra-brass",
+      "description": "Brass Kuber Yantra for financial stability, business growth, and success.",
+      "content": "The Kuber Yantra is dedicated to Lord Kuber, the god of wealth. Crafted on a brass plate, it ensures financial stability, success in business, and attracts opportunities for growth.",
+      "price": 1600,
+      "salePrice": 1000,
+      "images": ["/images/products/kuber-yantra.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "yantras",
+      "vendor": "Siddhi Divine",
+      "sku": "YAN-KUB-BR",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Brass",
+        "Size": "5 x 5 inches",
+        "Origin": "India",
+        "Energized": "Yes"
+      },
+      "benefits": [
+        { "icon": "Coins", "text": "Ensures financial stability." },
+        { "icon": "Briefcase", "text": "Boosts business success." },
+        { "icon": "Sparkles", "text": "Attracts wealth and opportunities." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Install in your home temple or office safe." },
+        { "step": 2, "instruction": "Offer yellow flowers and light incense daily." }
+      ],
+      "packageContents": [
+        "One Brass Kuber Yantra",
+        "Certificate of Authenticity",
+        "Worship Instructions"
+      ]
+    },
+    {
+      "name": "Navgraha Yantra - Energized Copper",
+      "slug": "navgraha-yantra-copper",
+      "description": "Energized Navgraha Yantra on copper plate to balance planetary influences and remove obstacles.",
+      "content": "The Navgraha Yantra harmonizes the energies of the nine planets, reducing malefic effects and enhancing positive cosmic vibrations. This energized copper yantra is essential for those facing astrological challenges.",
+      "price": 2000,
+      "salePrice": 1400,
+      "images": ["/images/products/navgraha-yantra.jpg"],
+      "type": "PRODUCT",
+      "categorySlug": "yantras",
+      "vendor": "Siddhi Divine",
+      "sku": "YAN-NAV-COP",
+      "availability": "In Stock",
+      "specifications": {
+        "Material": "Pure Copper",
+        "Size": "7 x 7 inches",
+        "Origin": "India",
+        "Energized": "Yes"
+      },
+      "benefits": [
+        { "icon": "Sun", "text": "Balances planetary influences." },
+        { "icon": "Shield", "text": "Protects from negative astrological effects." },
+        { "icon": "Sparkles", "text": "Enhances success and harmony." }
+      ],
+      "howToUse": [
+        { "step": 1, "instruction": "Install on a clean altar facing East." },
+        { "step": 2, "instruction": "Chant the Navgraha Mantra daily for maximum effect." }
+      ],
+      "packageContents": [
+        "One Energized Copper Navgraha Yantra",
+        "Certificate of Authenticity",
+        "Usage Instructions"
+      ]
+    },
     {
       "name": "Pure Asthdhatu OM Namah Shivaay Bracelet",
       "slug": "pure-asthdhatu-om-namah-shivaay-bracelet",

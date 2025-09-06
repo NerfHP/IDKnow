@@ -20,7 +20,7 @@ export default function AccountPage() {
 
   return (
     <>
-      <SEO title="My Account" description="Manage your Divine Path account details." />
+      <SEO title="My Account" description="Manage your Siddhi Divine account details." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
           <h1 className="font-sans text-4xl font-bold text-secondary">My Account</h1>
