@@ -1,123 +1,83 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Category, Prisma } from '@prisma/client';
 import httpStatus from 'http-status';
 import ApiError from '../utils/AppError';
 
 const prisma = new PrismaClient();
 
-// Helper function to get a category and all its descendants
-async function getCategoryWithChildren(slug: string) {
-  const category = await prisma.category.findUnique({
-    where: { slug },
-    include: {
-      children: {
-        include: {
-          children: true, // Include grandchildren if they exist
-        },
-      },
-    },
-  });
-  return category;
+async function getDescendantCategoryIds(categoryId: string): Promise<string[]> {
+    const children = await prisma.category.findMany({ where: { parentId: categoryId }, select: { id: true } });
+    let ids = children.map(child => child.id);
+    for (const child of children) {
+        const descendantIds = await getDescendantCategoryIds(child.id);
+        ids = [...ids, ...descendantIds];
+    }
+    return ids;
 }
 
-// Function to flatten the category tree into a list of IDs
-function getCategoryIds(category: any): string[] {
-  let ids = [category.id];
-  if (category.children) {
-    for (const child of category.children) {
-      ids = [...ids, ...getCategoryIds(child)];
-    }
-  }
-  return ids;
-}
-
-const queryItems = async (filter: { type?: string; categorySlug?: string; sortBy?: string }) => {
-  const { type, categorySlug, sortBy } = filter;
-
-  let orderBy = {};
-  if (sortBy === 'price-asc') {
-    orderBy = { salePrice: 'asc' };
-  } else if (sortBy === 'price-desc') {
-    orderBy = { salePrice: 'desc' };
-  } else if (sortBy === 'name-asc') {
-    orderBy = { name: 'asc' };
-  }
-
-  if (categorySlug) {
-    const parentCategory = await getCategoryWithChildren(categorySlug);
-    if (!parentCategory) {
-      return []; // No category found, so no items
-    }
-    const allCategoryIds = getCategoryIds(parentCategory);
-
-    return prisma.contentItem.findMany({
-      where: {
-        type: type,
-        categoryId: {
-          in: allCategoryIds,
-        },
-      },
-      include: {
-        category: true,
-      },
-      orderBy: orderBy,
-    });
-  }
-
-  // Fallback for queries without a category slug
-  return prisma.contentItem.findMany({ where: { type }, include: { category: true }, orderBy: orderBy, });
-};
-
-
-const getItemBySlug = async (slug: string) => {
-  const item = await prisma.contentItem.findUnique({
-    where: { slug },
-    include: {
-      category: true,
-    },
-  });
-  if (!item) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Item not found');
-  }
-  return item;
-};
-
-const getCategoryPageData = async (slug: string) => {
-  const category = await prisma.category.findUnique({
-    where: { slug },
-    include: { children: true },
-  });
-
+const getCategoryPageData = async (slug: string, sortBy?: string, availability?: string[]) => {
+  const category = await prisma.category.findUnique({ where: { slug }, include: { children: true } });
   if (!category) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Category not found');
   }
 
-  const items = await queryItems({ type: 'PRODUCT', categorySlug: slug });
-  
-  const groupedItems: { [categoryName: string]: any[] } = {};
+  const categoryIds = [category.id, ...(await getDescendantCategoryIds(category.id))];
 
-  // If the category has children, group the items by those children
-  if (category.children.length > 0) {
-    const childSlugs = category.children.map((c: any) => c.slug);
-    items.forEach((item: any) => {
-      if (childSlugs.includes(item.category.slug)) {
-        if (!groupedItems[item.category.name]) {
-          groupedItems[item.category.name] = [];
-        }
-        groupedItems[item.category.name].push(item);
-      }
-    });
+  let orderBy: Prisma.ContentItemOrderByWithRelationInput = {};
+  if (sortBy === 'price-asc') orderBy = { price: 'asc' };
+  else if (sortBy === 'price-desc') orderBy = { price: 'desc' };
+  else if (sortBy === 'name-asc') orderBy = { name: 'asc' };
+  else orderBy = { createdAt: 'desc' };
+  
+  const where: Prisma.ContentItemWhereInput = {
+    categories: { some: { id: { in: categoryIds } } }
+  };
+  if (availability && availability.length > 0) {
+    where.availability = { in: availability };
   }
 
+  const items = await prisma.contentItem.findMany({ where, include: { categories: true }, orderBy });
+  
+  const groupedItems: { [categoryName: string]: any[] } = {};
+  // Grouping logic can be re-added here if needed in the future
+  
   return { category, items, groupedItems };
 };
 
+const getAllProducts = async (sortBy?: string, availability?: string[]) => {
+  let orderBy: Prisma.ContentItemOrderByWithRelationInput = {};
+  if (sortBy === 'price-asc') orderBy = { price: 'asc' };
+  else if (sortBy === 'price-desc') orderBy = { price: 'desc' };
+  else if (sortBy === 'name-asc') orderBy = { name: 'asc' };
+  else orderBy = { createdAt: 'desc' };
+
+  const where: Prisma.ContentItemWhereInput = { type: 'PRODUCT' };
+  if (availability && availability.length > 0) {
+    where.availability = { in: availability };
+  }
+
+  return prisma.contentItem.findMany({ where, include: { categories: true }, orderBy });
+};
+
+const getItemBySlug = async (slug: string) => {
+  const item = await prisma.contentItem.findUnique({ where: { slug }, include: { categories: true } });
+  if (!item) throw new ApiError(httpStatus.NOT_FOUND, 'Item not found');
+  return item;
+};
+
 const getCategories = async () => {
-  return prisma.category.findMany({ where: { parentId: null } }); // Only fetch top-level categories
+  return prisma.category.findMany({ where: { parentId: null } });
+};
+
+const getFeaturedItems = async () => {
+  const products = await prisma.contentItem.findMany({ where: { type: 'PRODUCT' }, take: 4, include: { categories: true } });
+  const services = await prisma.contentItem.findMany({ where: { type: 'SERVICE' }, take: 2, include: { categories: true } });
+  return { products, services };
 };
 
 export const contentSerivce = {
-  queryItems,
   getItemBySlug,
   getCategories,
   getCategoryPageData,
+  getFeaturedItems,
+  getAllProducts,
 };

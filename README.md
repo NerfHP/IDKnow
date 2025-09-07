@@ -1,46 +1,33 @@
-# Siddhi Divine - A Full-Stack E-commerce & Service Platform
+# Siddhi Divine - Spiritual E-Commerce Store
 
-This project is a complete, production-ready full-stack web application that emulates the public functionality and user experience of a spiritual e-commerce and service website. It is built with a modern, type-safe tech stack including React, Node.js, Express, Prisma, and TypeScript.
+This is a complete full-stack application for a spiritual products e-commerce store, built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript.
 
+## Features
 
+- **Hierarchical Categories:** Browse products in main categories and unlimited sub-categories.
+- **Intelligent Seeding:** A single `seed-content.json` file manages all categories and products.
+- **Professional Theming:** Consistent branding based on the company logo, powered by Tailwind CSS.
+- **Modern Frontend:** Built with React, Vite, and React Query for a fast, modern user experience.
+- **Robust Backend:** Node.js, Express, and Prisma ORM for a reliable and scalable API.
 
-## ✨ Features
+## Setup and Installation
 
--   **Full-Stack TypeScript**: End-to-end type safety.
--   **Monorepo Structure**: Client and server codebases in a single repository.
--   **Products & Services**: Browse categorized products and services.
--   **User Authentication**: JWT-based email/password authentication (register, login, protected routes).
--   **Shopping Cart**: Client-side cart persistence.
--   **Blog**: A fully functional content section for articles.
--   **Contact Form**: Server-side handling for contact submissions.
--   **Database**: Prisma ORM with support for both SQLite (dev) and PostgreSQL (prod).
--   **API Documentation**: OpenAPI (YAML) specification for all backend endpoints.
--   **Containerized**: Fully configured with Docker and Docker Compose for easy setup and deployment.
--   **Production-Ready**: Includes logging, error handling, validation, and security best practices.
--   **Developer Experience**: Pre-configured with ESLint, Prettier, and Husky pre-commit hooks.
-
-## 🛠️ Tech Stack
-
--   **Frontend**: React 18 (Vite), TypeScript, Tailwind CSS, React Router, React Query
--   **Backend**: Node.js 20, Express, TypeScript, Prisma ORM
--   **Database**: PostgreSQL (Production), SQLite (Development)
--   **Authentication**: JSON Web Tokens (JWT)
--   **Validation**: Zod
--   **Testing**: Jest, Supertest, React Testing Library
--   **Deployment**: Docker
-
-## 🚀 Getting Started
-
-Follow these steps to get the project up and running locally.
-
-### Prerequisites
-
--   Node.js (v20 or later)
--   npm (v9 or later)
--   Docker and Docker Compose (for containerized setup)
-
-### 1. Clone the Repository
-
-```bash
-git clone <your-repo-url>
-cd Siddhi-Divine
+1.  **Install All Dependencies:**
+    ```bash
+    npm run install:all
+    ```
+2.  **Set Up Environment Variables:**
+    -   Copy `.env.example` to `server/.env`.
+    -   Copy `.env.example` to `client/.env.local`.
+3.  **Run Database Migration:**
+    ```bash
+    npm run db:migrate
+    ```
+4.  **Seed the Database:**
+    ```bash
+    npm run db:seed
+    ```
+5.  **Start Development Servers:**
+    ```bash
+    npm run dev
+    ```

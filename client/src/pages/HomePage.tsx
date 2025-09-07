@@ -13,14 +13,8 @@ import toast from 'react-hot-toast'; // Import toast
 import { useCart } from '@/hooks/useCart'; // Import useCart
 
 const fetchFeaturedItems = async () => {
-  const [productsRes, servicesRes] = await Promise.all([
-    api.get('/content/items?type=PRODUCT'),
-    api.get('/content/items?type=SERVICE'),
-  ]);
-  return {
-    products: (productsRes.data as ContentItem[]).slice(0, 4),
-    services: (servicesRes.data as ContentItem[]).slice(0, 2), // Still slice to 2 for homepage if multiple exist
-  };
+  const { data } = await api.get('/content/featured');
+  return data;
 };
 
 export default function HomePage() {
@@ -85,7 +79,7 @@ export default function HomePage() {
           ) : (
             data && (
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {data.products.map((item) => (
+                {data.products.map((item: ContentItem) => (
                   <Card key={item.id} item={item} />
                 ))}
               </div>
@@ -142,7 +136,7 @@ export default function HomePage() {
                 ) : (
                   // If more than one service, display the grid of cards
                   <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-                    {data.services.map((item) => (
+                    {data.services.map((item: ContentItem) => (
                       <Card key={item.id} item={item} />
                     ))}
                   </div>

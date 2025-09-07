@@ -22,32 +22,31 @@ model Category {
   slug        String        @unique
   description String?
   type        String
-  items       ContentItem[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
-  // Self-relation for parent-child hierarchy
   parentId    String?
   parent      Category?     @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
   children    Category[]    @relation("ParentChild")
+  
+  items       ContentItem[] // Relation to many products
 }
 
 model ContentItem {
-  id    String @id @default(cuid())
-  name  String
-  slug  String @unique
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
   description String
-  content      String?
-  price        Float?
-  salePrice    Float?
-  images       String
-  type         String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  content     String?
+  price       Float?
+  salePrice   Float?
+  images      String
+  type        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  categories  Category[] // Relation to many categories
 
-  categories Category[]
-
-  // Optional fields
   vendor         String?
   sku            String?
   availability   String?

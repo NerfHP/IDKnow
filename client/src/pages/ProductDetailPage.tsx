@@ -39,6 +39,7 @@ export default function ProductDetailPage() {
 
   const imageArray: string[] = JSON.parse(product.images || '[]');
   const finalPrice = product.salePrice || product.price || 0;
+  const primaryCategory = product.categories?.[0];
   
   // --- THIS IS THE FIX: Safely parse the data ---
   const specifications = product.specifications ? JSON.parse(product.specifications as unknown as string) : null;
@@ -61,7 +62,7 @@ export default function ProductDetailPage() {
             items={[
               { label: 'Home', href: '/' },
               { label: 'Products', href: '/products' },
-              { label: product.category.name, href: `/products/${product.category.slug}` },
+              { label: primaryCategory?.name || 'Category', href: `/products/${primaryCategory?.slug || ''}` },
               { label: product.name },
             ]}
           />

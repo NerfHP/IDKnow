@@ -47,7 +47,7 @@ export interface ContentItem {
   price?: number | null;
   images: string; // This remains a JSON string of image URLs
   type: ContentType;
-  category: Category;
+  categories: Category[];
   categoryId: string;
 
   // --- NEW & EXPANDED FIELDS ---

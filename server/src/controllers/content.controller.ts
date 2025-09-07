@@ -2,12 +2,18 @@ import { Request, Response } from 'express';
 import { catchAsync } from '../utils/catchAsync';
 import { contentSerivce } from '../services';
 
-const getItems = catchAsync(async (req: Request, res: Response) => {
-  const { type, category } = req.query;
-  const items = await contentSerivce.queryItems({
-    type: type as string,
-    categorySlug: category as string,
-  });
+const getCategoryPageData = catchAsync(async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  const { sortBy, availability } = req.query;
+  const availabilityArray = typeof availability === 'string' && availability ? availability.split(',') : [];
+  const data = await contentSerivce.getCategoryPageData(slug, sortBy as string, availabilityArray);
+  res.send(data);
+});
+
+const getAllProducts = catchAsync(async (req: Request, res: Response) => {
+  const { sortBy, availability } = req.query;
+  const availabilityArray = typeof availability === 'string' && availability ? availability.split(',') : [];
+  const items = await contentSerivce.getAllProducts(sortBy as string, availabilityArray);
   res.send(items);
 });
 
@@ -21,14 +27,15 @@ const getCategories = catchAsync(async (req: Request, res: Response) => {
   res.send(categories);
 });
 
-const getCategoryPageData = catchAsync(async (req: Request, res: Response) => {
-  const data = await contentSerivce.getCategoryPageData(req.params.slug);
-  res.send(data);
+const getFeaturedItems = catchAsync(async (req: Request, res: Response) => {
+  const items = await contentSerivce.getFeaturedItems();
+  res.send(items);
 });
 
 export const contentController = {
-  getItems,
+  getCategoryPageData,
+  getAllProducts,
   getItemBySlug,
   getCategories,
-  getCategoryPageData,
+  getFeaturedItems,
 };
