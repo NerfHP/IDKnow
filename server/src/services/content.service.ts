@@ -69,8 +69,18 @@ const getCategories = async () => {
 };
 
 const getFeaturedItems = async () => {
-  const products = await prisma.contentItem.findMany({ where: { type: 'PRODUCT' }, take: 4, include: { categories: true } });
-  const services = await prisma.contentItem.findMany({ where: { type: 'SERVICE' }, take: 2, include: { categories: true } });
+  const products = await prisma.contentItem.findMany({
+    where: { type: 'PRODUCT' },
+    take: 4,
+    include: { categories: true },
+    orderBy: { createdAt: 'desc' }
+  });
+  const services = await prisma.contentItem.findMany({
+    where: { type: 'SERVICE' },
+    take: 2,
+    include: { categories: true },
+    orderBy: { createdAt: 'desc' }
+  });
   return { products, services };
 };
 

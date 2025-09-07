@@ -4,7 +4,7 @@ import seedContent from '../src/utils/seed-content.json';
 
 const prisma = new PrismaClient();
 
-// A more specific type for your products
+// This defines the exact shape of your product data from the JSON file
 type SeedItem = {
     name: string;
     slug: string;
@@ -22,6 +22,8 @@ type SeedItem = {
     specifications?: Record<string, string>;
     benefits?: any[];
     variants?: any[];
+    howToUse?: any[]; // Added howToUse
+    packageContents?: string[]; // Added packageContents
 };
 
 type SeedCategory = {
@@ -29,6 +31,7 @@ type SeedCategory = {
     slug: string;
     description: string;
     type: string;
+    image?: string;
     children?: SeedCategory[];
 }
 
@@ -39,10 +42,11 @@ async function createCategory(categoryData: SeedCategory, parentId: string | nul
       slug: categoryData.slug,
       description: categoryData.description,
       type: categoryData.type,
+      image: categoryData.image,
       parentId: parentId,
     },
-
   });
+
   if (categoryData.children) {
     for (const childData of categoryData.children) {
       await createCategory(childData, category.id);
@@ -69,7 +73,6 @@ async function main() {
   for (const item of (seedContent.items as SeedItem[])) {
     const category = await prisma.category.findUnique({ where: { slug: item.categorySlug } });
     if (category) {
-      // --- FINAL, EXPLICIT APPROACH ---
       await prisma.contentItem.create({
         data: {
           name: item.name,
@@ -87,6 +90,8 @@ async function main() {
           specifications: JSON.stringify(item.specifications || null),
           benefits: JSON.stringify(item.benefits || null),
           variants: JSON.stringify(item.variants || null),
+          howToUse: JSON.stringify(item.howToUse || null),
+          packageContents: JSON.stringify(item.packageContents || null),
           categories: {
             connect: [{ id: category.id }],
           },

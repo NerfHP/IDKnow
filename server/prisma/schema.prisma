@@ -22,14 +22,13 @@ model Category {
   slug        String        @unique
   description String?
   type        String
+  image       String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
-
   parentId    String?
   parent      Category?     @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
   children    Category[]    @relation("ParentChild")
-  
-  items       ContentItem[] // Relation to many products
+  items       ContentItem[]
 }
 
 model ContentItem {
@@ -44,8 +43,7 @@ model ContentItem {
   type        String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  
-  categories  Category[] // Relation to many categories
+  categories  Category[]
 
   vendor         String?
   sku            String?
@@ -54,4 +52,6 @@ model ContentItem {
   specifications String?
   benefits       String?
   variants       String?
+  howToUse       String?
+  packageContents String?
 }

@@ -11,6 +11,7 @@ import { Gem, ShieldCheck, Globe, Zap } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils'; // Import formatCurrency
 import toast from 'react-hot-toast'; // Import toast
 import { useCart } from '@/hooks/useCart'; // Import useCart
+import ImageCarousel from '@/components/shared/ImageCarousel';
 
 const fetchFeaturedItems = async () => {
   const { data } = await api.get('/content/featured');

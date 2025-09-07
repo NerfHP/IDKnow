@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUp, Facebook, Instagram, Linkedin, Twitter, Youtube, Mail } from 'lucide-react';
-import logo from '@/assets/New Logoo.png';
+import logo from '@/assets/LOGO.png';
 
 // --- Data for Links (cleaner code) ---
 const quickLinks = [

@@ -31,6 +31,7 @@ export interface Category {
   slug: string;
   type: ContentType;
   description?: string;
+  image?: string;
 }
 
 export interface Variant {

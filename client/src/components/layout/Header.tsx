@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 
 // --- Custom Hooks & Assets ---
-import logo from '@/assets/New Logoo.png';
+import logo from '@/assets/LOGO.png';
 import { useAuth } from '@/hooks/useAuth';
 import { useCart } from '@/hooks/useCart';
 
@@ -61,10 +61,10 @@ const menuItems: MenuItem[] = [
     name: 'Yantras',
     path: '/products/yantras', // CORRECTED PATH
     subItems: [
-      { name: 'Shree Yantra', path: '/products/yantras/shree' },
-      { name: 'Maha Lakshmi Yantra', path: '/products/yantras/lakshmi' },
-      { name: 'Kuber Yantra', path: '/products/yantras/kuber' },
-      { name: 'Navgraha Yantra', path: '/products/yantras/navgraha' },
+      { name: 'Shree Yantra', path: '/products/yantras/shree-yantra' },
+      { name: 'Maha Lakshmi Yantra', path: '/products/yantras/lakshmi-yantra' },
+      { name: 'Kuber Yantra', path: '/products/yantras/kuber-yantra' },
+      { name: 'Navgraha Yantra', path: '/products/yantras/navgraha-yantra' },
     ],
   },
   {
