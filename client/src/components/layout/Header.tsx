@@ -71,10 +71,10 @@ const menuItems: MenuItem[] = [
     name: 'Bracelets',
     path: '/products/bracelets', // CORRECTED PATH
     subItems: [
-      { name: 'Rudraksha Bracelets', path: '/products/bracelets/rudraksha' },
-      { name: 'Crystal Bracelets', path: '/products/bracelets/crystal' },
-      { name: 'Karungali Bracelets', path: '/products/bracelets/karungali' },
-      { name: 'Gemstone Bracelets', path: '/products/bracelets/gemstone' },
+      { name: 'Rudraksha Bracelets', path: '/products/bracelets/rudraksha-bracelet' },
+      { name: 'Crystal Bracelets', path: '/products/bracelets/crystal-bracelet' },
+      { name: 'Karungali Bracelets', path: '/products/bracelets/karungali-bracelet' },
+      { name: 'Gemstone Bracelets', path: '/products/bracelets/gemstone-bracelet' },
     ],
   },
   {
