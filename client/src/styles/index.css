@@ -18,6 +18,6 @@
 
 @layer base {
   body {
-    @apply bg-background text-text-main font-sans antialiased;
+    @apply bg-transparent text-text-main font-sans antialiased;
   }
 }

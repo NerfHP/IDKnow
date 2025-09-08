@@ -26,9 +26,14 @@
   "author": "Gemini",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
+    "ogl": "^1.0.11",
     "three": "^0.180.0"
   }
 }

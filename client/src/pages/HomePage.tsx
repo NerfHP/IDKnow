@@ -11,7 +11,7 @@ import { Gem, ShieldCheck, Globe, Zap } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils'; // Import formatCurrency
 import toast from 'react-hot-toast'; // Import toast
 import { useCart } from '@/hooks/useCart'; // Import useCart
-import ParallaxHero from '@/components/ParallaxHero';
+import ShuffleHero from '@/components/ShuffleHero'; // Import the ShuffleHero component
 
 const fetchFeaturedItems = async () => {
   const { data } = await api.get('/content/featured');
@@ -38,11 +38,11 @@ export default function HomePage() {
       />
       
       {/* Hero Section */}
-      <ParallaxHero />
+      <ShuffleHero/>
 
       {/* Wrapper for the rest of the page */}
-      <div className="bg-transparent relative z-10">
-        <div className="py-16 space-y-16">
+      <div className="relative z-10">
+        <div className="py-16 space-y-20">
           {/* Featured Products Section */}
           <section className="container mx-auto px-4">
             <h2 className="text-center font-sans text-3xl font-bold text-text-main">
