@@ -100,15 +100,15 @@ const menuItems: MenuItem[] = [
     ],
   },
   { name: 'Mala', path: '/products/mala', subItems: [
-      { name: 'Karungali Malai', path: '/products/mala/karungali' },
-      { name: 'Rudraksha Mala', path: '/products/mala/rudraksha' },
-      { name: 'Crystal Mala',path: '/products/mala/crystal' },
-      { name: 'Tulsi Mala',path: '/products/mala/tulsi' },
+      { name: 'Karungali Malai', path: '/products/mala/karungali-malai' },
+      { name: 'Rudraksha Mala', path: '/products/mala/rudraksha-mala' },
+      { name: 'Crystal Mala',path: '/products/mala/crystal-mala' },
+      { name: 'Tulsi Mala',path: '/products/mala/tulsi-mala' },
     ],
   },
   { name: 'Aura Stones', path: '/products/aura-stones', subItems: [
-      { name: 'Healing Stones', path: '/products/aura-stones/healing' },
-      { name: 'Chakra Stones', path: '/products/aura-stones/chakra' },
+      { name: 'Healing Stones', path: '/products/aura-stones/healing-stones' },
+      { name: 'Chakra Stones', path: '/products/aura-stones/chakra-stones' },
     ],
   },
   { name: 'Astro Stone', path: '/products/astro-stone', subItems: [

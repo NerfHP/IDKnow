@@ -151,6 +151,12 @@
               "description": "Amplify your energy with a Clear Quartz mala, the master healer."
             }
           ]
+        },
+        {
+          "name": "Tulsi Mala",
+          "slug": "tulsi-mala",
+          "type": "PRODUCT",
+          "description": "Sacred Tulsi wood mala for spiritual growth and devotion."
         }
       ]
     },
