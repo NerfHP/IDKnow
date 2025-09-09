@@ -51,7 +51,7 @@ interface HeaderProps {
 // --- Menu Data (Unchanged) ---
 const rudrakshaSubItems = Array.from({ length: 14 }, (_, i) => ({
   name: `${i + 1} Mukhi`,
-  path: `/products/${i + 1}-mukhi-rudraksha`,
+  path: `/products/rudraksha/${i + 1}-mukhi-rudraksha`,
   icon: `/rudraksha/${i + 1}-mukhi.png`,
 }));
 
