@@ -127,6 +127,12 @@
           "description": "Classic malas for discipline and focus during meditation."
         },
         {
+          "name": "Tulsi Mala",
+          "slug": "tulsi-mala",
+          "type": "PRODUCT",
+          "description": "Sacred Tulsi wood mala for spiritual growth and devotion."
+        },
+        {
           "name": "Crystal Mala",
           "slug": "crystal-mala",
           "type": "PRODUCT",
@@ -151,12 +157,6 @@
               "description": "Amplify your energy with a Clear Quartz mala, the master healer."
             }
           ]
-        },
-        {
-          "name": "Tulsi Mala",
-          "slug": "tulsi-mala",
-          "type": "PRODUCT",
-          "description": "Sacred Tulsi wood mala for spiritual growth and devotion."
         }
       ]
     },
