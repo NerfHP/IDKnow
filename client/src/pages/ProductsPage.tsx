@@ -32,8 +32,9 @@ export default function ProductsPage() {
       />
       <div className="container mx-auto px-4 py-8">
         <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Products' }]} />
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center border-b pb-4">
           <h1 className="font-sans text-4xl font-bold">All Products</h1>
+          <p className="mt-2 text-gray-600 max-w-2xl mx-auto">Discover our complete collection of authentic spiritual items, from powerful yantras to healing crystals and traditional malas.</p>
         </div>
         
         <div className="my-8">
@@ -50,7 +51,7 @@ export default function ProductsPage() {
         )}
 
         {error && (
-          <div className="mt-8"><Alert type="error" message="Failed to load products." /></div>
+          <div className="mt-8"><Alert type="error" message="Failed to load products. Please try again later." /></div>
         )}
 
         {products && (
@@ -61,7 +62,9 @@ export default function ProductsPage() {
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500">No products found with the selected filters.</p>
+            <div className="text-center py-16">
+              <p className="text-gray-500">No products found with the selected filters.</p>
+            </div>
           )
         )}
       </div>

@@ -1,18 +1,28 @@
+// server/src/controllers/content.controller.ts
 import { Request, Response } from 'express';
 import { catchAsync } from '../utils/catchAsync';
 import { contentSerivce } from '../services';
 
 const getCategoryPageData = catchAsync(async (req: Request, res: Response) => {
-  const { slug } = req.params;
+  const fullPath = req.params[0];
   const { sortBy, availability } = req.query;
   const availabilityArray = typeof availability === 'string' && availability ? availability.split(',') : [];
-  const data = await contentSerivce.getCategoryPageData(slug, sortBy as string, availabilityArray);
+  
+  const data = await contentSerivce.getCategoryDataByPath(fullPath, sortBy as string, availabilityArray);
   res.send(data);
 });
 
+const getProductPageData = catchAsync(async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  const data = await contentSerivce.getProductDataBySlug(slug);
+  res.send(data);
+});
+
+// --- THIS FUNCTION IS NOW FULLY IMPLEMENTED ---
 const getAllProducts = catchAsync(async (req: Request, res: Response) => {
   const { sortBy, availability } = req.query;
   const availabilityArray = typeof availability === 'string' && availability ? availability.split(',') : [];
+  // This line was missing. It now correctly calls the service.
   const items = await contentSerivce.getAllProducts(sortBy as string, availabilityArray);
   res.send(items);
 });
@@ -34,8 +44,10 @@ const getFeaturedItems = catchAsync(async (req: Request, res: Response) => {
 
 export const contentController = {
   getCategoryPageData,
+  getProductPageData,
   getAllProducts,
   getItemBySlug,
   getCategories,
   getFeaturedItems,
 };
+

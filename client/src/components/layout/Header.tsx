@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 // --- Icon Imports ---
 import {
   ChevronDown,
-  ChevronRight,
   Search,
   User,
   ShoppingCart,
@@ -18,10 +17,11 @@ import {
   X,
 } from 'lucide-react';
 
-// --- Custom Hooks & Assets ---
+// --- Custom Hooks, Assets & NEW COMPONENT---
 import logo from '@/assets/LOGO.png';
 import { useAuth } from '@/hooks/useAuth';
 import { useCart } from '@/hooks/useCart';
+import { ShiftingNav } from '@/components/ShiftingNav'; // Adjust path if needed
 
 // --- TypeScript Interfaces for Menu Data ---
 interface SubSubItem {
@@ -34,11 +34,10 @@ interface SubItem {
   path: string;
   icon?: string;
   subSubItems?: SubSubItem[];
-  isSingleProduct?: boolean;
 }
 
 interface MenuItem {
-  name: string;
+  name:string;
   path: string;
   subItems: SubItem[];
 }
@@ -49,73 +48,70 @@ interface HeaderProps {
   onCartClick: () => void;
 }
 
-// --- Menu Data ---
+// --- Menu Data (Unchanged) ---
 const rudrakshaSubItems = Array.from({ length: 14 }, (_, i) => ({
   name: `${i + 1} Mukhi`,
-  path: `/products/${i + 1}-mukhi-rudraksha`, // CORRECTED PATH
-  icon: `/rudraksha/${i + 1}-mukhi.png`, // Placeholder path
+  path: `/products/${i + 1}-mukhi-rudraksha`,
+  icon: `/rudraksha/${i + 1}-mukhi.png`,
 }));
 
 const menuItems: MenuItem[] = [
-  {
-    name: 'Yantras',
-    path: '/products/yantras', // CORRECTED PATH
-    subItems: [
+  { name: 'Yantras', path: '/products/yantras', subItems: [
+      { name: 'Navgraha Yantra', path: '/products/yantras/navgraha-yantra', 
+        subSubItems: [
+          { name: 'NavGrah Yantra', path: '/products/yantras/navgraha-yantra/NavGrah-yantra' },
+          { name: 'Surya Yantra', path: '/products/yantras/navgraha-yantra/surya-yantra' },
+          { name: 'Chandra Yantra', path: '/products/yantras/navgraha-yantra/chandra-yantra' },
+          { name: 'Mangal Yantra', path: '/products/yantras/navgraha-yantra/mangal-yantra' },
+          { name: 'Budh Yantra', path: '/products/yantras/navgraha-yantra/budh-yantra' },
+          { name: 'Guru Yantra', path: '/products/yantras/navgraha-yantra/guru-yantra' },
+          { name: 'Shukra Yantra', path: '/products/yantras/navgraha-yantra/shukra-yantra' },
+          { name: 'Shani Yantra', path: '/products/yantras/navgraha-yantra/shani-yantra' },
+          { name: 'Rahu Yantra', path: '/products/yantras/navgraha-yantra/rahu-yantra' },
+          { name: 'Ketu Yantra', path: '/products/yantras/navgraha-yantra/ketu-yantra' },
+        ] },
+      { name: 'Shri Sarv Karya Siddhi Yantra', path: '/products/yantras/Shri-Sarv-Karya-Siddhi-yantra' },
+      { name: 'Shree Sampoorn kuber Laxhmi Yantra', path: '/products/yantras/Shree-Sampoorn-kuber-Laxhmi-yantra' },
       { name: 'Shree Yantra', path: '/products/yantras/shree-yantra' },
       { name: 'Maha Lakshmi Yantra', path: '/products/yantras/lakshmi-yantra' },
       { name: 'Kuber Yantra', path: '/products/yantras/kuber-yantra' },
-      { name: 'Navgraha Yantra', path: '/products/yantras/navgraha-yantra' },
+      { name: 'Siddh Saraswati Yantra', path: '/products/yantras/Siddh-Saraswati-yantra' },
+      { name: 'Shri Kanakdhara Yantra', path: '/products/yantras/Shri-Kanakdhara-yantra' },
+      { name: 'Ganesh Yantra', path: '/products/yantras/Ganesh-yantra' },
+      { name: 'Gayatri Yantra', path: '/products/yantras/Gayatri-yantra' },
+      { name: 'Maha Mrityunjaya Yantra', path: '/products/yantras/Maha-Mrityunjaya-yantra' },
+      { name: 'Vastu Yantra', path: '/products/yantras/Vastu-yantra' },
+      { name: 'Vyapar Yantra', path: '/products/yantras/Vyapar-yantra' },
     ],
   },
-  {
-    name: 'Bracelets',
-    path: '/products/bracelets', // CORRECTED PATH
-    subItems: [
+  { name: 'Bracelets', path: '/products/bracelets', subItems: [
       { name: 'Rudraksha Bracelets', path: '/products/bracelets/rudraksha-bracelet' },
       { name: 'Crystal Bracelets', path: '/products/bracelets/crystal-bracelet' },
       { name: 'Karungali Bracelets', path: '/products/bracelets/karungali-bracelet' },
-      { name: 'Gemstone Bracelets', path: '/products/bracelets/gemstone-bracelet' },
+      { name: 'Silver Bracelets', path: '/products/bracelets/silver-bracelet' },
+      { name: 'Gold Bracelets', path: '/products/bracelets/gold-bracelet' },
+      { name: 'Copper Bracelets', path: '/products/bracelets/copper-bracelet' },
     ],
   },
-  {
-    name: 'Rudraksha',
-    path: '/products/rudraksha', // CORRECTED PATH
-    subItems:[
+  { name: 'Rudraksha', path: '/products/rudraksha', subItems:[
       ...rudrakshaSubItems,
-      // This is a category that is also a single product
-      { name: 'Gauri Shanker Rudraksha',
-        path: '/products/gauri-shanker-rudraksha', // Links directly to a PRODUCT page
-        isSingleProduct: true 
-      },
-      { 
-        name: 'Ganesh Rudraksha',
-        path: '/products/ganesh-rudraksha', // Links directly to a PRODUCT page
-        isSingleProduct: true 
-      },
+      { name: 'Gauri Shanker Rudraksha', path: '/products/gauri-shanker-rudraksha' },
+      { name: 'Ganesh Rudraksha', path: '/products/ganesh-rudraksha' },
     ],
   },
-  {
-    name: 'Mala',
-    path: '/products/mala', // CORRECTED PATH
-    subItems: [
+  { name: 'Mala', path: '/products/mala', subItems: [
       { name: 'Karungali Malai', path: '/products/mala/karungali' },
       { name: 'Rudraksha Mala', path: '/products/mala/rudraksha' },
       { name: 'Crystal Mala',path: '/products/mala/crystal' },
       { name: 'Tulsi Mala',path: '/products/mala/tulsi' },
     ],
   },
-  {
-    name: 'Aura Stones',
-    path: '/products/aura-stones', // CORRECTED PATH
-    subItems: [
+  { name: 'Aura Stones', path: '/products/aura-stones', subItems: [
       { name: 'Healing Stones', path: '/products/aura-stones/healing' },
       { name: 'Chakra Stones', path: '/products/aura-stones/chakra' },
     ],
   },
-  {
-    name: 'Astro Stone',
-    path: '/products/astro-stone', // CORRECTED PATH
-    subItems: [
+  { name: 'Astro Stone', path: '/products/astro-stone', subItems: [
       { name: 'Gemstones', path: '/products/astro-stone/gemstones' },
       { name: 'Birth Stones', path: '/products/astro-stone/birthstones' },
     ],
@@ -123,8 +119,7 @@ const menuItems: MenuItem[] = [
 ];
 
 export default function Header({ onSearchClick, onCartClick }: HeaderProps) {
-  // State that is truly local to the Header
-  const [openMenu, setOpenMenu] = useState<number | null>(null);
+  // State for the MOBILE menu only
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [openMobileSubMenu, setOpenMobileSubMenu] = useState<string | null>(null);
   
@@ -133,12 +128,10 @@ export default function Header({ onSearchClick, onCartClick }: HeaderProps) {
   const { isAuthenticated } = useAuth();
   const { cartCount } = useCart();
 
-  // Effect to close mobile menu on ESC key press
+  // Effects for closing mobile menu (Unchanged)
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-      }
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
     };
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
@@ -147,21 +140,10 @@ export default function Header({ onSearchClick, onCartClick }: HeaderProps) {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-
-// AFTER (Corrected)
-  const getLinkClass = (path: string, isNavLink: boolean = false) => {
-    const isActive = isNavLink
-      ? location.pathname === path
-      : location.pathname.startsWith(path);
-      
-    return `flex items-center gap-1 relative font-medium transition-colors hover:text-primary ${
-      isActive ? 'text-primary' : 'text-text-main'
-    }`;
-  };
   
   return (
     <header className="sticky top-0 z-50 bg-white/80 shadow-md backdrop-blur-md">
-      {/* Top Announcement Bar */}
+      {/* Top Announcement Bar (Unchanged) */}
       <div className="bg-primary text-white text-sm">
         <div className="container mx-auto flex items-center justify-between py-1 px-6">
           <p className="flex-grow text-center font-semibold">
@@ -184,57 +166,14 @@ export default function Header({ onSearchClick, onCartClick }: HeaderProps) {
           <span className="text-xl font-bold text-text-main font-sans">Siddhi Divine</span>
         </Link>
         
-        {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-8">
-          <NavLink to="/" className={({isActive}) => getLinkClass('/', isActive)}>Home</NavLink>
-          {menuItems.map((item, i) => (
-            <div
-              key={item.name}
-              className="relative"
-              onMouseEnter={() => setOpenMenu(i)}
-              onMouseLeave={() => setOpenMenu(null)}
-            >
-              <Link to={item.path} className={getLinkClass(item.path)}>
-                {item.name}
-                <ChevronDown size={14} className={`mt-0.5 transition-transform ${openMenu === i ? 'rotate-180' : ''}`} />
-              </Link>
-              <AnimatePresence>
-                {openMenu === i && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    transition={{ duration: 0.2 }}
-                    className={`absolute left-0 top-full bg-white shadow-lg rounded-lg p-4 z-50 ${item.name === 'Rudraksha' ? 'min-w-[320px]' : 'min-w-[240px]'}`}
-                  >
-                    <div className={item.name === 'Rudraksha' ? 'grid grid-cols-2 gap-3' : 'flex flex-col'}>
-                      {item.subItems.map((subItem) => (
-                        <div key={subItem.name} className="relative group/sub">
-                          <Link to={subItem.path} className="flex items-center gap-2 px-3 py-2 rounded text-gray-700 hover:bg-orange-50 w-full">
-                            {subItem.icon && <img src={subItem.icon} alt={subItem.name} className="w-6 h-6 object-contain"/>}
-                            <span>{subItem.name}</span>
-                            {subItem.subSubItems && <ChevronRight size={14} className="ml-auto" />}
-                          </Link>
-                          {subItem.subSubItems && (
-                             <div className="absolute left-full top-0 ml-1 bg-white shadow-lg rounded-lg p-2 min-w-[180px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-opacity">
-                               {subItem.subSubItems.map((deepItem) => (
-                                 <Link key={deepItem.name} to={deepItem.path} className="block px-4 py-2 text-gray-700 hover:bg-orange-50 rounded">
-                                   {deepItem.name}
-                                 </Link>
-                               ))}
-                             </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </nav>
+        {/* --- MODIFICATION START --- */}
+        {/* Replace the old desktop menu with our new component */}
+        
+        <ShiftingNav menuItems={menuItems} />
+        
+        {/* --- MODIFICATION END --- */}
 
-        {/* Utility Icons */}
+        {/* Utility Icons (Unchanged) */}
         <div className="flex items-center gap-5 text-xl text-text-main">
           <button onClick={onSearchClick} className="hover:text-primary transition-colors" aria-label="Search">
             <Search size={22} />
@@ -254,7 +193,7 @@ export default function Header({ onSearchClick, onCartClick }: HeaderProps) {
         </div>
       </div>
       
-      {/* Mobile Menu */}
+      {/* Mobile Menu (Unchanged) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 

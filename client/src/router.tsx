@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import React, { Suspense } from 'react';
-
 import RootLayout from './components/layout/RootLayout';
 import HomePage from './pages/HomePage';
 import Spinner from './components/shared/Spinner';
@@ -48,18 +47,24 @@ export const router = createBrowserRouter([
         path: 'products',
         children: [
           {
-            index: true, // Handles the main /products page
+            index: true, // /products
             element: <SuspenseWrapper><ProductsPage /></SuspenseWrapper>,
           },
           {
-            path: ':categorySlug', // Handles category pages, e.g., /products/bracelets
+            // ROUTE FOR SINGLE PRODUCTS (MUST COME FIRST)
+            // Matches: /products/yantras/navgraha-yantra/navgraha-yantra-copper
+            // The last part is captured as `productSlug`
+            path: '*/:productSlug', 
+            element: <SuspenseWrapper><ProductDetailPage /></SuspenseWrapper>,
+          },
+          {
+            // ROUTE FOR CATEGORIES (CATCH-ALL, COMES LAST)
+            // Matches: /products/yantras
+            // Matches: /products/yantras/navgraha-yantra
+            path: '*',
             element: <SuspenseWrapper><CategoryPage /></SuspenseWrapper>,
           },
         ]
-      },
-      {
-        path: 'product/:slug', // Handles single product pages, e.g., /product/my-bracelet
-        element: <SuspenseWrapper><ProductDetailPage /></SuspenseWrapper>,
       },
       
       // --- Other Application Routes ---

@@ -1,8 +1,10 @@
+// In client/src/pages/ProductDetailPage.tsx
+
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
-import { ContentItem } from '@/types';
+import { ContentItem, Category } from '@/types';
 import Spinner from '@/components/shared/Spinner';
 import Alert from '@/components/shared/Alert';
 import Breadcrumbs from '@/components/shared/Breadcrumbs';
@@ -13,35 +15,45 @@ import toast from 'react-hot-toast';
 import SEO from '@/components/shared/SEO';
 import { Heart, Share2, Minus, Plus, CheckCircle, Package, Target, Sparkles, Shield } from 'lucide-react';
 
-const fetchProductBySlug = async (slug: string) => {
-  const { data } = await api.get(`/content/product/${slug}`);
-  return data as ContentItem;
-};
+// This page expects a clear response with product data and its full breadcrumb trail.
+interface ProductResponse {
+  product: ContentItem;
+  breadcrumbs: Category[];
+}
 
-// A map to render icons dynamically
+// We use the dedicated API endpoint for fetching all product page data.
+const fetchProductData = async (slug: string) => {
+    const { data } = await api.get(`/content/product-data/${slug}`);
+    return data as ProductResponse;
+}
+
+// A map to render icons dynamically, just like in your version.
 const iconMap: { [key: string]: React.ElementType } = {
   CheckCircle, Package, Target, Sparkles, Shield, Heart
 };
 
 export default function ProductDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { productSlug } = useParams<{ productSlug: string }>();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
 
-  const { data: product, isLoading, isError } = useQuery({
-    queryKey: ['product', slug],
-    queryFn: () => fetchProductBySlug(slug!),
-    enabled: !!slug,
+  // This hook now fetches both the product and its breadcrumbs in one call.
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['productDetail', productSlug],
+    queryFn: () => fetchProductData(productSlug!),
+    enabled: !!productSlug,
   });
 
   if (isLoading) return <div className="flex h-96 items-center justify-center"><Spinner /></div>;
-  if (isError || !product) return <div className="container mx-auto p-8"><Alert type="error" message="Product not found." /></div>;
+  if (isError || !data) return <div className="container mx-auto p-8"><Alert type="error" message="Product not found." /></div>;
 
+  // Destructure the data from the API response
+  const { product, breadcrumbs } = data;
+
+  // --- All of your detailed logic and state is preserved ---
   const imageArray: string[] = JSON.parse(product.images || '[]');
   const finalPrice = product.salePrice || product.price || 0;
-  const primaryCategory = product.categories?.[0];
   
-  // --- THIS IS THE FIX: Safely parse the data ---
   const specifications = product.specifications ? JSON.parse(product.specifications as unknown as string) : null;
   const benefits = product.benefits ? JSON.parse(product.benefits as unknown as string) : [];
   const howToUse = product.howToUse ? JSON.parse(product.howToUse as unknown as string) : [];
@@ -53,19 +65,27 @@ export default function ProductDetailPage() {
     toast.success(`${quantity} x ${product.name} added to cart!`);
   };
 
+  // --- BREADCRUMB LOGIC (IMPROVED) ---
+  // This builds the full, correct, nested breadcrumb trail.
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Products', href: '/products' },
+    ...breadcrumbs.map((bc, index) => {
+      const path = breadcrumbs.slice(0, index + 1).map(p => p.slug).join('/');
+      return { label: bc.name, href: `/products/${path}` };
+    }),
+    { label: product.name }
+  ];
+
   return (
     <>
       <SEO title={product.name} description={product.description} imageUrl={imageArray[0]} />
       <div className="bg-background">
         <div className="container mx-auto px-4 py-8">
-          <Breadcrumbs
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Products', href: '/products' },
-              { label: primaryCategory?.name || 'Category', href: `/products/${primaryCategory?.slug || ''}` },
-              { label: product.name },
-            ]}
-          />
+          {/* Your breadcrumbs will now be perfectly nested */}
+          <Breadcrumbs items={breadcrumbItems} />
+
+          {/* --- ALL OF YOUR DETAILED JSX IS PRESERVED BELOW --- */}
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
             
             {/* Left Column: Image */}
@@ -88,9 +108,9 @@ export default function ProductDetailPage() {
               <div className="flex items-center gap-4">
                 <p className="text-sm font-medium">Quantity:</p>
                 <div className="flex items-center border rounded-md bg-white">
-                   <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="px-3 py-2 hover:bg-gray-50"><Minus size={14} /></button>
-                   <span className="px-4 text-sm font-bold w-12 text-center">{quantity}</span>
-                   <button onClick={() => setQuantity(q => q + 1)} className="px-3 py-2 hover:bg-gray-50"><Plus size={14} /></button>
+                    <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="px-3 py-2 hover:bg-gray-50"><Minus size={14} /></button>
+                    <span className="px-4 text-sm font-bold w-12 text-center">{quantity}</span>
+                    <button onClick={() => setQuantity(q => q + 1)} className="px-3 py-2 hover:bg-gray-50"><Plus size={14} /></button>
                 </div>
               </div>
               <div className="mt-6 space-y-4">
@@ -174,3 +194,4 @@ export default function ProductDetailPage() {
     </>
   );
 }
+
