@@ -33,6 +33,7 @@ const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
     {children}
   </Suspense>
 );
+export default SuspenseWrapper;
 
 export const router = createBrowserRouter([
   {
