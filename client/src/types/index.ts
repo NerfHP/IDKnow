@@ -32,6 +32,8 @@ export interface Category {
   type: ContentType;
   description?: string;
   image?: string;
+  parentId?: string | null;
+  parent?: Category | null;
 }
 
 export interface Variant {

@@ -71,23 +71,131 @@
       "description": "Explore authentic Rudraksha beads, known for their divine energy and healing properties.",
       "children": [
         {
-          "name": "Nepali Rudraksha",
-          "slug": "nepali-rudraksha",
-          "type": "PRODUCT",
-          "description": "High-quality, authentic Rudraksha beads sourced directly from Nepal."
-        },
-        {
           "name": "1 Mukhi Rudraksha",
           "slug": "1-mukhi-rudraksha",
           "type": "PRODUCT",
           "description": "The rarest bead, representing Lord Shiva and enlightenment."
         },
         {
-          "name": "Indonesian Rudraksha",
-          "slug": "indonesian-rudraksha",
+          "name": "2 Mukhi Rudraksha",
+          "slug": "2-mukhi-rudraksha",
           "type": "PRODUCT",
-          "description": "Smaller, potent Rudraksha beads sourced directly from Indonesia."
+          "description": "Symbolizes Ardhanarishvara, promoting harmony and balance."
         },
+        {
+          "name": "3 Mukhi Rudraksha",
+          "slug": "3-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Agni, helping to burn past karmas and fears."
+        },
+        {
+          "name": "4 Mukhi Rudraksha",
+          "slug": "4-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Associated with Lord Brahma, enhancing creativity and knowledge."
+        },
+        {
+          "name": "5 Mukhi Rudraksha",
+          "slug": "5-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "The most common bead, linked to Lord Shiva for overall well-being."
+        },
+        {
+          "name": "6 Mukhi Rudraksha",
+          "slug": "6-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Kartikeya, boosting willpower and courage."
+        },
+        {
+          "name": "7 Mukhi Rudraksha",
+          "slug": "7-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Associated with Goddess Mahalakshmi for wealth and prosperity."
+        },
+        {
+          "name": "8 Mukhi Rudraksha",
+          "slug": "8-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Symbolizes Lord Ganesha, removing obstacles and enhancing wisdom."
+        },
+        {
+          "name": "9 Mukhi Rudraksha",
+          "slug": "9-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Goddess Durga, providing strength and protection."
+        },
+        {
+          "name": "10 Mukhi Rudraksha",
+          "slug": "10-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Linked to Lord Vishnu, ensuring protection from negative energies."
+        },
+        {
+          "name": "11 Mukhi Rudraksha",
+          "slug": "11-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Hanuman, enhancing courage and self-confidence."
+        },
+        {
+          "name": "12 Mukhi Rudraksha",
+          "slug": "12-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Associated with Lord Surya, promoting vitality and leadership."
+        },
+        {
+          "name": "13 Mukhi Rudraksha",
+          "slug": "13-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Symbolizes Lord Indra, enhancing creativity and intuition."
+        },
+        {
+          "name": "14 Mukhi Rudraksha",
+          "slug": "14-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Hanuman, providing strength and protection."
+        },
+        {
+          "name": "15 Mukhi Rudraksha",
+          "slug": "15-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Linked to Lord Pashupatinath, promoting spiritual growth."
+        },
+        {
+          "name": "16 Mukhi Rudraksha",
+          "slug": "16-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Kartikeya, enhancing courage and willpower."
+        },
+        {
+          "name": "17 Mukhi Rudraksha",
+          "slug": "17-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Associated with Lord Vishnu, ensuring protection and prosperity."
+        },
+        {
+          "name": "18 Mukhi Rudraksha",
+          "slug": "18-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Symbolizes Lord Lakshmi Narayana, promoting wealth and spiritual growth."
+        },
+        {
+          "name": "19 Mukhi Rudraksha",
+          "slug": "19-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Narasimha, providing protection and courage."
+        },
+        {
+          "name": "20 Mukhi Rudraksha",
+          "slug": "20-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Linked to Lord Krishna, enhancing compassion and love."
+        },
+        {
+          "name": "21 Mukhi Rudraksha",
+          "slug": "21-mukhi-rudraksha",
+          "type": "PRODUCT",
+          "description": "Represents Lord Vishnu, promoting spiritual enlightenment."
+        },                                      
         {
           "name": "Gauri Shanker Rudraksha",
           "slug": "gauri-shanker-rudraksha",
@@ -127,12 +235,6 @@
           "description": "Classic malas for discipline and focus during meditation."
         },
         {
-          "name": "Tulsi Mala",
-          "slug": "tulsi-mala",
-          "type": "PRODUCT",
-          "description": "Sacred Tulsi wood mala for spiritual growth and devotion."
-        },
-        {
           "name": "Crystal Mala",
           "slug": "crystal-mala",
           "type": "PRODUCT",
@@ -157,6 +259,12 @@
               "description": "Amplify your energy with a Clear Quartz mala, the master healer."
             }
           ]
+        },
+        {
+          "name": "Tulsi Mala",
+          "slug": "tulsi-mala",
+          "type": "PRODUCT",
+          "description": "Sacred Tulsi wood mala for devotion and spiritual protection."
         }
       ]
     },
@@ -534,7 +642,7 @@
       "salePrice": 1050,
       "images": ["/images/products/rud-indo-2.jpg"],
       "type": "PRODUCT",
-      "categorySlug": "indonesian-rudraksha",
+      "categorySlug": "2-mukhi-rudraksha",
       "vendor": "Siddhi Divine",
       "sku": "SKI-R2-SC",
       "availability": "In Stock",
@@ -569,7 +677,7 @@
       "salePrice": 18500,
       "images": ["/images/products/rud-nepal-2.jpg"],
       "type": "PRODUCT",
-      "categorySlug": "nepali-rudraksha",
+      "categorySlug": "2-mukhi-rudraksha",
       "vendor": "Siddhi Divine",
       "sku": "SKN-R2-RSC",
       "availability": "In Stock",
@@ -605,7 +713,7 @@
       "salePrice": 1200,
       "images": ["/images/products/rud-indo-3.jpg"],
       "type": "PRODUCT",
-      "categorySlug": "indonesian-rudraksha",
+      "categorySlug": "3-mukhi-rudraksha",
       "vendor": "Siddhi Divine",
       "sku": "SKI-R3",
       "availability": "In Stock",
@@ -762,7 +870,7 @@
     },
     {
       "name": "Certified 1 Mukhi Rudraksha",
-      "slug": "1-mukhi-rudraksha",
+      "slug": "Certified-1-mukhi-rudraksha",
       "description": "The most powerful and auspicious bead, a divine symbol of Lord Shiva, bringing immense peace, focus, and spiritual enlightenment.",
       "content": "The 1 Mukhi Rudraksha is the king of all beads and is a direct manifestation of Lord Shiva. It is believed to destroy all sins and lead the wearer on the path of liberation. This half-moon shaped bead is sourced from India and is lab-certified for 100% authenticity.",
       "price": 3100.00,

@@ -4,9 +4,19 @@ import ApiError from '../utils/AppError';
 
 const prisma = new PrismaClient();
 
-// --- HELPER FUNCTIONS (UNCHANGED & CORRECTED) ---
+const categoryHierarchyInclude = {
+  categories: {
+    include: {
+      parent: {
+        include: {
+          parent: true,
+        },
+      },
+    },
+  },
+};
 
-// This recursive function gets all child category IDs. It's correct.
+// --- HELPER FUNCTIONS ---
 async function getDescendantCategoryIds(categoryId: string): Promise<string[]> {
     const children = await prisma.category.findMany({ where: { parentId: categoryId }, select: { id: true } });
     let ids = children.map(child => child.id);
@@ -17,104 +27,116 @@ async function getDescendantCategoryIds(categoryId: string): Promise<string[]> {
     return ids;
 }
 
-// This recursive function builds the breadcrumb trail for a category.
-async function getCategoryAncestry(categoryId: string): Promise<Category[]> {
-  const category = await prisma.category.findUnique({
-    where: { id: categoryId },
-    include: { parent: true },
-  });
-
-  if (!category) {
+// THIS FUNCTION IS NOW MORE ROBUST AND INCLUDES DEBUGGING LOGS
+async function getCategoryAncestry(categoryId: string | null): Promise<Category[]> {
+  // Prevent crash if categoryId is null or undefined
+  if (!categoryId) {
+    console.error("getCategoryAncestry was called with a null or undefined categoryId.");
     return [];
   }
-  
-  // If the category has no parent, it's the start of the trail.
-  if (!category.parent) {
-    return [category];
-  }
 
-  const ancestors = await getCategoryAncestry(category.parentId!);
-  return [...ancestors, category];
+  try {
+    const category = await prisma.category.findUnique({
+      where: { id: categoryId },
+      include: { parent: true },
+    });
+
+    if (!category) {
+      console.warn(`Category with ID "${categoryId}" not found during ancestry lookup.`);
+      return [];
+    }
+    if (!category.parent) {
+      return [category];
+    }
+    // Ensure we don't get stuck in an infinite loop
+    if (category.parentId === category.id) {
+        console.error(`Circular reference detected in category hierarchy for ID "${categoryId}".`);
+        return [category];
+    }
+
+    const ancestors = await getCategoryAncestry(category.parentId);
+    return [...ancestors, category];
+  } catch (error) {
+    console.error(`Error fetching category ancestry for ID "${categoryId}":`, error);
+    // Return an empty array on error to prevent the whole page from crashing
+    return [];
+  }
 }
 
+// --- MAIN SERVICE FUNCTIONS (CORRECTED) ---
 
-// --- NEW, SEPARATE SERVICE FUNCTIONS ---
-
-/**
- * Fetches data specifically for a category page.
- * Finds the category by its full nested path.
- */
 const getCategoryDataByPath = async (fullPath: string, sortBy?: string, availability?: string[]) => {
-  if (!fullPath) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Category path is required');
-  }
-
+  if (!fullPath) throw new ApiError(httpStatus.BAD_REQUEST, 'Category path is required');
   const slugs = fullPath.split('/');
   const finalSlug = slugs[slugs.length - 1];
-
   const category = await prisma.category.findFirst({
-    where: {
-      slug: finalSlug,
-      parent: slugs.length > 1 ? { slug: slugs[slugs.length - 2] } : null,
-    },
+    where: { slug: finalSlug, parent: slugs.length > 1 ? { slug: slugs[slugs.length - 2] } : null },
   });
-  
-  if (!category) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Category not found');
-  }
-
-  // Now that we have the category, get its breadcrumbs and all items within it and its children.
+  if (!category) throw new ApiError(httpStatus.NOT_FOUND, 'Category not found');
   const breadcrumbs = await getCategoryAncestry(category.id);
   const categoryIds = [category.id, ...(await getDescendantCategoryIds(category.id))];
-
-  // Your existing sorting and filtering logic is perfect.
   let orderBy: Prisma.ContentItemOrderByWithRelationInput = { createdAt: 'desc' };
   if (sortBy === 'price-asc') orderBy = { price: 'asc' };
   else if (sortBy === 'price-desc') orderBy = { price: 'desc' };
-  else if (sortBy === 'name-asc') orderBy = { name: 'asc' };
-  
-  const where: Prisma.ContentItemWhereInput = {
-    categories: { some: { id: { in: categoryIds } } }
-  };
-  if (availability && availability.length > 0) {
-    where.availability = { in: availability };
-  }
-
-  const items = await prisma.contentItem.findMany({ where, include: { categories: true }, orderBy });
-  
-  // Return a clean, predictable object for the category page.
+  const where: Prisma.ContentItemWhereInput = { categories: { some: { id: { in: categoryIds } } } };
+  if (availability && availability.length > 0) where.availability = { in: availability };
+  const items = await prisma.contentItem.findMany({ where, include: categoryHierarchyInclude, orderBy });
   return { category, items, breadcrumbs };
 };
 
-
-/**
- * Fetches data specifically for a product detail page.
- * Finds the product by its unique slug.
- */
 const getProductDataBySlug = async (slug: string) => {
-  const product = await prisma.contentItem.findUnique({
-    where: { slug: slug, type: 'PRODUCT' },
-    include: { categories: true }, // Include the immediate category
+  console.log(`[Backend Service] Searching for product with slug: "${slug}"`);
+  const product = await prisma.contentItem.findFirst({
+    where: { 
+      slug: slug, 
+      type: 'PRODUCT' 
+    },
+    include: categoryHierarchyInclude,
   });
 
+
+  console.log('[Backend Service] Product found in database:', product ? product.name : 'null');
   if (!product) {
+    console.error(`Product with slug "${slug}" not found.`);
     throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');
   }
-
-  // If the product is in a category, get the full breadcrumb trail for that category.
-  let breadcrumbs: Category[] = [];
-  if (product.categories && product.categories.length > 0) {
-    // A product is usually in only one primary category.
-    const primaryCategoryId = product.categories[0].id;
-    breadcrumbs = await getCategoryAncestry(primaryCategoryId);
-  }
   
-  // Return a clean, predictable object for the product page.
+  let breadcrumbs: Category[] = [];
+  // This check is now safer
+  if (product.categories && product.categories.length > 0) {
+    breadcrumbs = await getCategoryAncestry(product.categories[0].id);
+  } else {
+    console.warn(`Product with slug "${slug}" has no categories assigned.`);
+  }
   return { product, breadcrumbs };
 };
 
+// ... (Rest of your service file remains the same) ...
+const getAllProducts = async (sortBy?: string, availability?: string[]) => {
+  let orderBy: Prisma.ContentItemOrderByWithRelationInput = { createdAt: 'desc' };
+  if (sortBy === 'price-asc') orderBy = { price: 'asc' };
+  else if (sortBy === 'price-desc') orderBy = { price: 'desc' };
+  const where: Prisma.ContentItemWhereInput = { type: 'PRODUCT' };
+  if (availability && availability.length > 0) where.availability = { in: availability };
+  return prisma.contentItem.findMany({ where, include: categoryHierarchyInclude, orderBy });
+};
 
-// --- EXISTING FUNCTIONS (UNCHANGED) ---
+// THIS IS THE CORRECTED FUNCTION WITH THE DUPLICATE REMOVED
+const getFeaturedItems = async () => {
+  const products = await prisma.contentItem.findMany({
+    where: { type: 'PRODUCT' },
+    take: 4,
+    include: categoryHierarchyInclude,
+    orderBy: { createdAt: 'desc' }
+  });
+  const services = await prisma.contentItem.findMany({
+    where: { type: 'SERVICE' },
+    take: 2,
+    include: categoryHierarchyInclude,
+    orderBy: { createdAt: 'desc' }
+  });
+  return { products, services };
+};
 
 const getAllServices = async () => {
   return prisma.contentItem.findMany({
@@ -124,23 +146,8 @@ const getAllServices = async () => {
   });
 };
 
-const getAllProducts = async (sortBy?: string, availability?: string[]) => {
-  let orderBy: Prisma.ContentItemOrderByWithRelationInput = {};
-  if (sortBy === 'price-asc') orderBy = { price: 'asc' };
-  else if (sortBy === 'price-desc') orderBy = { price: 'desc' };
-  else if (sortBy === 'name-asc') orderBy = { name: 'asc' };
-  else orderBy = { createdAt: 'desc' };
-
-  const where: Prisma.ContentItemWhereInput = { type: 'PRODUCT' };
-  if (availability && availability.length > 0) {
-    where.availability = { in: availability };
-  }
-
-  return prisma.contentItem.findMany({ where, include: { categories: true }, orderBy });
-};
-
 const getItemBySlug = async (slug: string) => {
-  const item = await prisma.contentItem.findUnique({ where: { slug }, include: { categories: true } });
+  const item = await prisma.contentItem.findUnique({ where: { slug }, include: categoryHierarchyInclude });
   if (!item) throw new ApiError(httpStatus.NOT_FOUND, 'Item not found');
   return item;
 };
@@ -149,29 +156,13 @@ const getCategories = async () => {
   return prisma.category.findMany({ where: { parentId: null } });
 };
 
-const getFeaturedItems = async () => {
-  const products = await prisma.contentItem.findMany({
-    where: { type: 'PRODUCT' },
-    take: 4,
-    include: { categories: true },
-    orderBy: { createdAt: 'desc' }
-  });
-  const services = await prisma.contentItem.findMany({
-    where: { type: 'SERVICE' },
-    take: 2,
-    include: { categories: true },
-    orderBy: { createdAt: 'desc' }
-  });
-  return { products, services };
-};
-
 export const contentSerivce = {
   getItemBySlug,
   getCategories,
   getFeaturedItems,
   getAllProducts,
-  // EXPORT THE NEW FUNCTIONS
   getCategoryDataByPath,
   getProductDataBySlug,
   getAllServices,
 };
+

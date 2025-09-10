@@ -23,7 +23,7 @@ interface ProductResponse {
 
 // We use the dedicated API endpoint for fetching all product page data.
 const fetchProductData = async (slug: string) => {
-    const { data } = await api.get(`/content/product-data/${slug}`);
+    const { data } = await api.get(`/api/content/product-data/${slug}`);
     return data as ProductResponse;
 }
 
@@ -36,6 +36,8 @@ export default function ProductDetailPage() {
   const { productSlug } = useParams<{ productSlug: string }>();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
+
+  console.log(`ProductDetailPage is fetching data for slug:`, productSlug);
 
   // This hook now fetches both the product and its breadcrumbs in one call.
   const { data, isLoading, isError } = useQuery({

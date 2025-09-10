@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { cn, formatCurrency } from '@/lib/utils';
-import { ContentItem } from '@/types';
+import { ContentItem, Category } from '@/types';
 import Button from './Button';
 import { useCart } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
@@ -10,9 +10,29 @@ interface CardProps {
   className?: string;
 }
 
+// THIS NEW HELPER FUNCTION IS THE KEY TO THE FIX.
+// It recursively builds the full category path (e.g., "yantras/shree-yantra")
+// from the nested parent data that your API now provides.
+const generateCategoryPath = (category: Category | null | undefined): string => {
+  if (!category) {
+    return '';
+  }
+  // This line requires the `parent` property to be defined on your Category type.
+  const parentPath = category.parent ? generateCategoryPath(category.parent) : '';
+  return parentPath ? `${parentPath}/${category.slug}` : category.slug;
+};
+
+
 export default function Card({ item, className }: CardProps) {
   const { addToCart } = useCart();
-  const linkTo = `/product/${item.slug}`;
+  
+  // --- THIS IS THE FIX ---
+  // Instead of the old hardcoded path, we now dynamically build the full,
+  // nested URL that your router expects.
+  const primaryCategory = item.categories?.[0];
+  const categoryPath = generateCategoryPath(primaryCategory);
+  const linkTo = `/products/${categoryPath}/${item.slug}`;
+  console.log(`Generated Link for "${item.name}":`, linkTo);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -22,13 +42,13 @@ export default function Card({ item, className }: CardProps) {
   }
   
   const imageArray = JSON.parse(item.images || '[]');
-  const imageUrl = imageArray[0] || 'https://picsum.photos/800/600';
+  const imageUrl = imageArray[0] || 'https://placehold.co/800x600/F7F7F7/CCC?text=Image';
 
   const discount = item.price && item.salePrice ? Math.round(((item.price - item.salePrice) / item.price) * 100) : 0;
 
   return (
     <Link
-      to={linkTo}
+      to={linkTo} // The link now uses the correct, nested URL
       className={cn(
         'group overflow-hidden rounded-lg border bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col',
         className,
@@ -57,7 +77,7 @@ export default function Card({ item, className }: CardProps) {
               <p className="text-sm text-gray-500 line-through">{formatCurrency(item.price)}</p>
             </div>
           ) : (
-            <p className="text-lg font-bold text-gray-800">{formatCurrency(item.price)}</p>
+            <p className="text-lg font-bold text-gray-800">{formatCurrency(item.price || 0)}</p>
           )}
         </div>
         <div className="mt-4">
@@ -67,3 +87,4 @@ export default function Card({ item, className }: CardProps) {
     </Link>
   );
 }
+
