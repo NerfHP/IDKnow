@@ -52,16 +52,16 @@ export const router = createBrowserRouter([
             element: <SuspenseWrapper><ProductsPage /></SuspenseWrapper>,
           },
           {
-            // Dedicated route for product detail: /products/:productSlug
-            path: ':productSlug',
-            element: <SuspenseWrapper><ProductDetailPage /></SuspenseWrapper>,
-          },
-          {
-            // Catch-all for categories: /products/*
+            // Category browsing (any depth)
             path: '*',
             element: <SuspenseWrapper><CategoryPage /></SuspenseWrapper>,
           },
         ]
+      },
+      {
+        // Product detail route moved to singular base to avoid slug collision with top-level categories
+        path: 'product/:productSlug',
+        element: <SuspenseWrapper><ProductDetailPage /></SuspenseWrapper>,
       },
       
       // --- Other Application Routes ---

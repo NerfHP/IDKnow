@@ -27,7 +27,7 @@ export default function Card({ item, className }: CardProps) {
   const { addToCart } = useCart();
   
   // --- FIX: Always link to /products/:item.slug for product detail pages ---
-  const linkTo = `/products/${item.slug}`;
+  const linkTo = `/product/${item.slug}`;
   // Optionally, you can log for debugging:
   // console.log(`Generated Link for "${item.name}":`, linkTo);
 
