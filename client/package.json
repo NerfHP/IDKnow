@@ -30,6 +30,7 @@
     "react-hook-form": "^7.51.5",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.23.1",
+    "siddhi-divine-store": "file:..",
     "tailwind-merge": "^2.3.0",
     "three": "^0.180.0",
     "zod": "^3.23.8",

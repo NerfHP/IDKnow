@@ -23,8 +23,9 @@ interface ProductResponse {
 
 // We use the dedicated API endpoint for fetching all product page data.
 const fetchProductData = async (slug: string) => {
-    const { data } = await api.get(`/api/content/product-data/${slug}`);
-    return data as ProductResponse;
+  // IMPORTANT: baseURL already includes /api, so we only call /content/...
+  const { data } = await api.get(`/content/product-data/${slug}`);
+  return data as ProductResponse;
 }
 
 // A map to render icons dynamically, just like in your version.

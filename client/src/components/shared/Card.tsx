@@ -26,13 +26,10 @@ const generateCategoryPath = (category: Category | null | undefined): string => 
 export default function Card({ item, className }: CardProps) {
   const { addToCart } = useCart();
   
-  // --- THIS IS THE FIX ---
-  // Instead of the old hardcoded path, we now dynamically build the full,
-  // nested URL that your router expects.
-  const primaryCategory = item.categories?.[0];
-  const categoryPath = generateCategoryPath(primaryCategory);
-  const linkTo = `/products/${categoryPath}/${item.slug}`;
-  console.log(`Generated Link for "${item.name}":`, linkTo);
+  // --- FIX: Always link to /products/:item.slug for product detail pages ---
+  const linkTo = `/products/${item.slug}`;
+  // Optionally, you can log for debugging:
+  // console.log(`Generated Link for "${item.name}":`, linkTo);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();

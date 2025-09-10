@@ -52,16 +52,12 @@ export const router = createBrowserRouter([
             element: <SuspenseWrapper><ProductsPage /></SuspenseWrapper>,
           },
           {
-            // ROUTE FOR SINGLE PRODUCTS (MUST COME FIRST)
-            // Matches: /products/yantras/navgraha-yantra/navgraha-yantra-copper
-            // The last part is captured as `productSlug`
-            path: '*/:productSlug', 
+            // Dedicated route for product detail: /products/:productSlug
+            path: ':productSlug',
             element: <SuspenseWrapper><ProductDetailPage /></SuspenseWrapper>,
           },
           {
-            // ROUTE FOR CATEGORIES (CATCH-ALL, COMES LAST)
-            // Matches: /products/yantras
-            // Matches: /products/yantras/navgraha-yantra
+            // Catch-all for categories: /products/*
             path: '*',
             element: <SuspenseWrapper><CategoryPage /></SuspenseWrapper>,
           },
