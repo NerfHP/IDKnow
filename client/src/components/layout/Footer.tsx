@@ -13,10 +13,10 @@ const quickLinks = [
 ];
 
 const policyLinks = [
-  { to: '/terms', text: 'Terms and Conditions' },
-  { to: '/privacy', text: 'Privacy Policy' },
-  { to: '/shipping', text: 'Shipping Policy' },
-  { to: '/refunds', text: 'Refund and Cancellations' },
+  { to: '/terms-and-conditions', text: 'Terms and Conditions' },
+  { to: '/privacy-policy', text: 'Privacy Policy' },
+  { to: '/shipping-policy', text: 'Shipping Policy' },
+  { to: '/returns-policy', text: 'Refund and Exchange' },
 ];
 
 const socialLinks = [

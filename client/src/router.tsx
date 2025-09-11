@@ -21,6 +21,13 @@ const RegisterPage = React.lazy(() => import('./pages/RegisterPage'));
 const AccountPage = React.lazy(() => import('./pages/AccountPage'));
 const CartPage = React.lazy(() => import('./pages/CartPage'));
 const CheckoutPage = React.lazy(() => import('./pages/CheckoutPage'));
+const TermsPage = React.lazy(() => import('./pages/TermsPage'));
+const TrackOrderPage = React.lazy(() => import('./pages/TrackOrderPage'));
+const BestsellersPage = React.lazy(() => import('./pages/BestsellersPage'));
+const FaqsPage = React.lazy(() => import('./pages/FaqsPage'));
+const PrivacyPolicyPage = React.lazy(() => import('./pages/PrivacyPolicyPage'));
+const ShippingPolicyPage = React.lazy(() => import('./pages/ShippingPolicyPage'));
+const ReturnsPolicyPage = React.lazy(() => import('./pages/ReturnsPolicyPage'));
 
 const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
   <Suspense
@@ -109,7 +116,35 @@ export const router = createBrowserRouter([
         path: 'checkout',
         element: <SuspenseWrapper><CheckoutPage /></SuspenseWrapper>,
       },
-      
+      {
+        path: 'returns-policy',
+        element: <SuspenseWrapper><ReturnsPolicyPage /></SuspenseWrapper>,
+      },
+      {
+        path: 'Terms-and-Conditions',
+        element: <SuspenseWrapper><TermsPage /></SuspenseWrapper>,
+      },
+      {
+        path: 'Privacy-Policy',
+        element: <SuspenseWrapper><PrivacyPolicyPage /></SuspenseWrapper>,
+      },
+      {
+        path: 'Shipping-Policy',
+        element: <SuspenseWrapper><ShippingPolicyPage /></SuspenseWrapper>,
+      },      
+      {
+        path: 'track-order',
+        element: <SuspenseWrapper><TrackOrderPage /></SuspenseWrapper>,
+      },
+      {
+        path: 'bestsellers',
+        element: <SuspenseWrapper><BestsellersPage /></SuspenseWrapper>,
+      },
+      {
+        path: 'faqs',
+        element: <SuspenseWrapper><FaqsPage /></SuspenseWrapper>,
+      },
+
       // --- Catch-All 404 Route ---
       { path: '*', element: <NotFoundPage /> },
     ],

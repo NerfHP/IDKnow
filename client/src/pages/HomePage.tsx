@@ -8,21 +8,61 @@ import Button from '@/components/shared/Button';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/shared/SEO';
 import { Gem, ShieldCheck, Globe, Zap } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils'; // Import formatCurrency
-import toast from 'react-hot-toast'; // Import toast
-import { useCart } from '@/hooks/useCart'; // Import useCart
-import ShuffleHero from '@/components/ShuffleHero'; // Import the ShuffleHero component
+import { formatCurrency } from '@/lib/utils';
+import toast from 'react-hot-toast';
+import { useCart } from '@/hooks/useCart';
+import ShuffleHero from '@/components/ShuffleHero';
+import FaqAccordion from '@/components/shared/FaqAccordion';
 
+// --- TYPE DEFINITIONS FOR OUR DATA ---
+interface FeaturedData {
+  products: ContentItem[];
+  services: ContentItem[];
+}
+interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+// --- API CALLS (NOW CORRECTED) ---
+
+// This is your original, working function, now restored.
 const fetchFeaturedItems = async () => {
   const { data } = await api.get('/content/featured');
-  return data;
+  return data as FeaturedData;
 };
 
+// These new functions now follow your correct API path structure.
+const fetchBestsellers = async () => {
+  const { data } = await api.get('/content/bestsellers');
+  return data as ContentItem[];
+};
+
+const fetchFaqs = async () => {
+  const { data } = await api.get('/content/faqs');
+  return data as FaqItem[];
+};
+
+
 export default function HomePage() {
-  const { addToCart } = useCart(); // Use useCart hook
-  const { data, isLoading, error } = useQuery({
+  const { addToCart } = useCart();
+  
+  // Your existing, working query for featured items.
+  const { data: featuredData, isLoading: isFeaturedLoading, error: featuredError } = useQuery({
     queryKey: ['featuredItems'],
     queryFn: fetchFeaturedItems,
+  });
+
+  // New, separate queries for the new sections.
+  const { data: bestsellers, isLoading: isBestsellersLoading } = useQuery({
+    queryKey: ['bestsellersHome'],
+    queryFn: fetchBestsellers,
+  });
+
+  const { data: faqs, isLoading: isFaqsLoading } = useQuery({
+    queryKey: ['faqsHome'],
+    queryFn: fetchFaqs,
   });
 
   const handleAddToCart = (item: ContentItem) => {
@@ -37,13 +77,12 @@ export default function HomePage() {
         description="Discover authentic spiritual products, book puja services, and find guidance with our expert astrology consultations. Your path to peace and well-being starts here."
       />
       
-      {/* Hero Section */}
       <ShuffleHero/>
 
-      {/* Wrapper for the rest of the page */}
-      <div className="relative z-10">
+      <div className="relative z-10 bg-background">
         <div className="py-16 space-y-20">
-          {/* Featured Products Section */}
+          
+          {/* Featured Products Section (Your original, working code) */}
           <section className="container mx-auto px-4">
             <h2 className="text-center font-sans text-3xl font-bold text-text-main">
               Featured Products
@@ -51,19 +90,15 @@ export default function HomePage() {
             <p className="mt-2 text-center text-gray-600">
               Handpicked items for your spiritual practices.
             </p>
-            {isLoading ? (
-              <div className="flex justify-center py-8">
-                <Spinner />
-              </div>
-            ) : error ? (
-              <Alert
-                type="error"
-                message="Could not load featured products. Please try again later."
-              />
+            {isFeaturedLoading ? (
+              <div className="flex justify-center py-8"><Spinner /></div>
+            ) : featuredError ? (
+              <Alert type="error" message="Could not load featured products. Please try again later."/>
             ) : (
-              data && (
+              // This safe check prevents crashes while data is loading
+              featuredData?.products && featuredData.products.length > 0 && (
                 <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                  {data.products.map((item: ContentItem) => (
+                  {featuredData.products.map((item: ContentItem) => (
                     <Card key={item.id} item={item} />
                   ))}
                 </div>
@@ -71,7 +106,26 @@ export default function HomePage() {
             )}
           </section>
 
-          {/* --- UPDATED "OUR SERVICES" SECTION --- */}
+          {/* --- NEW BEST SELLERS SECTION --- */}
+          <section className="container mx-auto px-4">
+            <div className="flex flex-wrap justify-between items-center gap-4">
+              <div>
+                <h2 className="font-sans text-3xl font-bold text-text-main">Our Best Sellers</h2>
+                <p className="mt-2 text-gray-600">Discover what our community loves the most.</p>
+              </div>
+              <Button asChild variant="outline"><Link to="/bestsellers">View All Best Sellers</Link></Button>
+            </div>
+            {isBestsellersLoading ? ( <div className="flex justify-center py-8"><Spinner /></div> )
+             : (
+              bestsellers && bestsellers.length > 0 && (
+                <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {bestsellers.slice(0, 4).map((item) => <Card key={item.id} item={item} />)}
+                </div>
+              )
+            )}
+          </section>
+          
+          {/* Our Services Section (Your original, working code) */}
           <section className="container mx-auto px-4">
             <h2 className="text-center font-sans text-3xl font-bold text-text-main">
               Our Services
@@ -79,48 +133,45 @@ export default function HomePage() {
             <p className="mt-2 text-center text-gray-600">
               Connect with ancient traditions through our expert services.
             </p>
-            {isLoading ? (
-              <div className="flex justify-center py-8">
-                <Spinner />
-              </div>
+            {isFeaturedLoading ? (
+              <div className="flex justify-center py-8"><Spinner /></div>
             ) : (
-              data && data.services.length > 0 && (
+              // This safe check prevents crashes
+              featuredData?.services && featuredData.services.length > 0 && (
                 <div className="mt-8">
-                  {data.services.length === 1 ? (
-                    // If there is only one service, show a large, detailed view
+                  {featuredData.services.length === 1 ? (
                     <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg border">
                       <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div>
                           <img 
-                            src={JSON.parse(data.services[0].images || '[]')[0]} 
-                            alt={data.services[0].name}
+                            src={JSON.parse(featuredData.services[0].images || '[]')[0]} 
+                            alt={featuredData.services[0].name}
                             className="w-full rounded-lg object-cover aspect-square"
                           />
                         </div>
                         <div className="text-center md:text-left">
-                          <h3 className="font-sans text-2xl font-bold text-text-main">{data.services[0].name}</h3>
-                          <p className="text-gray-600 text-sm mt-2">{data.services[0].description}</p>
+                          <h3 className="font-sans text-2xl font-bold text-text-main">{featuredData.services[0].name}</h3>
+                          <p className="text-gray-600 text-sm mt-2">{featuredData.services[0].description}</p>
                           <div className="flex items-center justify-center md:justify-start gap-2 mt-3">
-                            {data.services[0].salePrice && (
-                              <p className="text-2xl font-bold text-primary-dark">{formatCurrency(data.services[0].salePrice)}</p>
+                            {featuredData.services[0].salePrice && (
+                              <p className="text-2xl font-bold text-primary-dark">{formatCurrency(featuredData.services[0].salePrice)}</p>
                             )}
-                            <p className={`text-lg ${data.services[0].salePrice ? 'text-gray-500 line-through' : 'font-bold text-primary-dark'}`}>
-                              {formatCurrency(data.services[0].price)}
+                            <p className={`text-lg ${featuredData.services[0].salePrice ? 'text-gray-500 line-through' : 'font-bold text-primary-dark'}`}>
+                              {formatCurrency(featuredData.services[0].price || 0)}
                             </p>
                           </div>
                           <div className="mt-4 flex flex-col gap-2">
-                            <Button size="md" onClick={() => handleAddToCart(data.services[0])}>Add to Cart</Button>
+                            <Button size="md" onClick={() => handleAddToCart(featuredData.services[0])}>Add to Cart</Button>
                             <Button asChild size="md" variant="outline">
-                              <Link to={`/services/${data.services[0].slug}`}>View Details</Link>
+                              <Link to={`/services/${featuredData.services[0].slug}`}>View Details</Link>
                             </Button>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    // If more than one service, display the grid of cards
                     <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-                      {data.services.map((item: ContentItem) => (
+                      {featuredData.services.map((item: ContentItem) => (
                         <Card key={item.id} item={item} />
                       ))}
                     </div>
@@ -129,7 +180,8 @@ export default function HomePage() {
               )
             )}
           </section>
-          {/* Trust Signals Section */}
+          
+          {/* Trust Signals Section (Unchanged) */}
           <section className="container mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center border-t border-gray-200 pt-16">
                   <div className="flex flex-col items-center">
@@ -153,6 +205,20 @@ export default function HomePage() {
                       <p className="text-sm text-gray-600">Sourced directly from Nepal and Indonesia for the highest quality.</p>
                   </div>
               </div>
+          </section>
+
+          {/* --- NEW FAQS SECTION --- */}
+          <section className="container mx-auto px-4">
+             <div className="text-center">
+                <h2 className="font-sans text-3xl font-bold text-text-main">Common Questions</h2>
+                <p className="mt-2 text-gray-600">Here to help you on your spiritual journey.</p>
+             </div>
+             <div className="mt-8 max-w-3xl mx-auto">
+                {isFaqsLoading ? <div className="flex justify-center py-8"><Spinner /></div> 
+                : (
+                  faqs && faqs.length > 0 && <FaqAccordion faqs={faqs} />
+                )}
+             </div>
           </section>
         </div>
       </div>

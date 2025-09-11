@@ -14,6 +14,8 @@ import { useCart } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
 import SEO from '@/components/shared/SEO';
 import { Heart, Share2, Minus, Plus, CheckCircle, Package, Target, Sparkles, Shield } from 'lucide-react';
+import ProductInfoAccordion from '@/components/shared/ProductInfoAccordion';
+import ProductImageGallery from '@/components/shared/ProductImageGallery';
 
 // This page expects a clear response with product data and its full breadcrumb trail.
 interface ProductResponse {
@@ -93,9 +95,7 @@ export default function ProductDetailPage() {
             
             {/* Left Column: Image */}
             <div>
-              <div className="border bg-white rounded-lg p-4 shadow-sm">
-                <img src={imageArray[0]} alt={product.name} className="w-full h-auto object-cover rounded-md aspect-square"/>
-              </div>
+              <ProductImageGallery images={imageArray} productName={product.name} />
             </div>
 
             {/* Right Column: Details */}
@@ -126,6 +126,9 @@ export default function ProductDetailPage() {
                       <div className="border-l"></div>
                       <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary"><Share2 size={16}/> Share</button>
                   </div>
+              </div>
+              <div className="mt-8 pt-6 border-t">
+                <ProductInfoAccordion />
               </div>
             </div>
           </div>

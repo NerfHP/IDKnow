@@ -138,6 +138,49 @@ const getFeaturedItems = async () => {
   return { products, services };
 };
 
+// --- NEW FUNCTIONS TO ADD ---
+
+const getBestsellers = async () => {
+  // In a real application, you would have sales data to determine bestsellers.
+  // For now, we will simulate this by taking a few products randomly.
+  return prisma.contentItem.findMany({
+    where: { type: 'PRODUCT' },
+    take: 8, // Get 8 products for the bestsellers page
+    include: categoryHierarchyInclude,
+    orderBy: {
+      // You can change this to a real metric later, like `orders: 'desc'`
+      createdAt: 'asc' 
+    }
+  });
+};
+
+const getFaqs = async () => {
+  // For now, we will hardcode the FAQ data.
+  // In the future, you could move this to a database table.
+  return [
+    {
+      id: 'faq1',
+      question: 'Are your Rudraksha beads authentic?',
+      answer: 'Yes, all our Rudraksha beads are 100% authentic and sourced directly from trusted suppliers in Nepal and Indonesia. Each bead comes with a certificate of authenticity.'
+    },
+    {
+      id: 'faq2',
+      question: 'How are the products energized?',
+      answer: 'Every spiritual item, including Rudraksha, gemstones, and yantras, undergoes a traditional energization process (Prana Pratishtha) performed by our expert priests to ensure it is spiritually activated and ready for use.'
+    },
+    {
+      id: 'faq3',
+      question: 'What is your return policy?',
+      answer: 'We offer a 7-day return policy for items that are in their original, unused condition. Please refer to our detailed Returns & Exchanges Policy page for more information.'
+    },
+    {
+      id: 'faq4',
+      question: 'Do you ship internationally?',
+      answer: 'Yes, we offer worldwide shipping. Shipping costs and delivery times are calculated at checkout based on your location.'
+    }
+  ];
+};
+
 const getAllServices = async () => {
   return prisma.contentItem.findMany({
     where: { type: 'SERVICE' },
@@ -164,5 +207,7 @@ export const contentSerivce = {
   getCategoryDataByPath,
   getProductDataBySlug,
   getAllServices,
+  getBestsellers,
+  getFaqs,
 };
 
