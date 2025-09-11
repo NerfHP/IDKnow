@@ -16,6 +16,7 @@ import SEO from '@/components/shared/SEO';
 import { Heart, Share2, Minus, Plus, CheckCircle, Package, Target, Sparkles, Shield } from 'lucide-react';
 import ProductInfoAccordion from '@/components/shared/ProductInfoAccordion';
 import ProductImageGallery from '@/components/shared/ProductImageGallery';
+import Reviews from '@/components/shared/Reviews';
 
 // This page expects a clear response with product data and its full breadcrumb trail.
 interface ProductResponse {
@@ -194,6 +195,9 @@ export default function ProductDetailPage() {
                 </ul>
               </div>
             )}
+            <div className="mt-12 pt-8 border-t">
+              <Reviews productId={product.id} />
+            </div>
           </div>
         </div>
       </div>
