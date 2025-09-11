@@ -108,12 +108,20 @@ export default function HomePage() {
 
           {/* --- NEW BEST SELLERS SECTION --- */}
           <section className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div>
-                <h2 className="font-sans text-3xl font-bold text-text-main">Our Best Sellers</h2>
-                <p className="mt-2 text-gray-600">Discover what our community loves the most.</p>
+            <div className="relative text-center">
+              {/* This container ensures the text is always centered */}
+              <h2 className="font-sans text-3xl font-bold text-text-main">Our Best Sellers</h2>
+              <p className="mt-2 text-gray-600">Discover what our community loves the most.</p>
+
+              {/* This button is positioned to the right on larger screens */}
+              <div className="absolute top-1/2 right-0 -translate-y-1/2 hidden sm:block">
+                  <Button asChild variant="outline"><Link to="/bestsellers">View All Best Sellers</Link></Button>
               </div>
-              <Button asChild variant="outline"><Link to="/bestsellers">View All Best Sellers</Link></Button>
+              
+              {/* This button appears below the text on smaller screens */}
+              <div className="mt-4 sm:hidden">
+                  <Button asChild variant="outline"><Link to="/bestsellers">View All Best Sellers</Link></Button>
+              </div>
             </div>
             {isBestsellersLoading ? ( <div className="flex justify-center py-8"><Spinner /></div> )
              : (
@@ -210,7 +218,7 @@ export default function HomePage() {
           {/* --- NEW FAQS SECTION --- */}
           <section className="container mx-auto px-4">
              <div className="text-center">
-                <h2 className="font-sans text-3xl font-bold text-text-main">Common Questions</h2>
+                <h2 className="font-sans text-3xl font-bold text-text-main">FAQs</h2>
                 <p className="mt-2 text-gray-600">Here to help you on your spiritual journey.</p>
              </div>
              <div className="mt-8 max-w-3xl mx-auto">

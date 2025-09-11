@@ -42,6 +42,21 @@ const getFeaturedItems = catchAsync(async (req: Request, res: Response) => {
   res.send(items);
 });
 
+const getBestsellers = catchAsync(async (req: Request, res: Response) => {
+  const items = await contentSerivce.getBestsellers();
+  res.send(items);
+});
+
+const getFaqs = catchAsync(async (req: Request, res: Response) => {
+  const faqs = await contentSerivce.getFaqs();
+  res.send(faqs);
+});
+
+const getAllServices = catchAsync(async (req: Request, res: Response) => {
+    const items = await contentSerivce.getAllServices();
+    res.send(items);
+});
+
 export const contentController = {
   getCategoryPageData,
   getProductPageData,
@@ -49,5 +64,8 @@ export const contentController = {
   getItemBySlug,
   getCategories,
   getFeaturedItems,
+  getBestsellers,
+  getFaqs,
+  getAllServices,
 };
 

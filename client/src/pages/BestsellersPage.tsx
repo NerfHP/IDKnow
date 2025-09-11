@@ -9,7 +9,7 @@ import SEO from '@/components/shared/SEO';
 
 const fetchBestsellers = async () => {
   // THE FIX: This now uses the correct API path, just like your working HomePage.
-  const { data } = await api.get('/api/content/bestsellers');
+  const { data } = await api.get('/content/bestsellers');
   return data as ContentItem[];
 };
 
