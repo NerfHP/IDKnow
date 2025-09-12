@@ -1,4 +1,59 @@
 import { prisma } from '../config/prisma';
+import { Category } from '@prisma/client';
+
+const categoryHierarchyInclude = {
+  categories: {
+    include: {
+      parent: {
+        include: {
+          parent: true,
+        },
+      },
+    },
+  },
+};
+
+// --- HELPER FUNCTIONS ---
+async function getCategoryAncestry(categoryId: string | null): Promise<Category[]> {
+  if (!categoryId) return [];
+  try {
+    const category = await prisma.category.findUnique({
+      where: { id: categoryId },
+      include: { parent: true },
+    });
+    if (!category) return [];
+    if (!category.parent) return [category];
+    if (category.parentId === category.id) return [category];
+    const ancestors = await getCategoryAncestry(category.parentId);
+    return [...ancestors, category];
+  } catch (error) {
+    console.error(`Error fetching category ancestry for ID "${categoryId}":`, error);
+    return [];
+  }
+}
+
+// --- MAIN SERVICE FUNCTIONS ---
+
+// --- THIS FUNCTION IS THE FIX ---
+const getHighlightedReviews = async () => {
+  console.log("[Backend Service] Fetching highlighted reviews...");
+  const reviews = await prisma.review.findMany({
+    // THE FIX: The strict `where` clause has been removed.
+    // This will now fetch ANY review to ensure the carousel has content.
+    // In the future, you can add back the filter for rating and images.
+    
+    include: {
+      user: { select: { name: true } },
+      product: { include: categoryHierarchyInclude },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: 10, // Get the latest 10 reviews
+  });
+  console.log(`[Backend Service] Found ${reviews.length} reviews to highlight.`);
+  return reviews;
+};
 
 const getReviewsByProductId = async (productId: string) => {
   const reviews = await prisma.review.findMany({
@@ -9,7 +64,6 @@ const getReviewsByProductId = async (productId: string) => {
   return reviews;
 };
 
-// Updated to accept an optional imageUrl
 const createReview = async (
   productId: string, 
   userId: string, 
@@ -22,20 +76,16 @@ const createReview = async (
       rating,
       comment,
       imageUrl,
-      // --- THIS IS THE FIX ---
-      // We use `connect` to link this new review to the existing product and user.
-      product: {
-        connect: { id: productId }
-      },
-      user: {
-        connect: { id: userId }
-      }
+      product: { connect: { id: productId } },
+      user: { connect: { id: userId } }
     },
   });
 };
 
+
 export const reviewService = {
   getReviewsByProductId,
   createReview,
+  getHighlightedReviews,
 };
 

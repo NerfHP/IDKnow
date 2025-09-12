@@ -23,9 +23,11 @@ interface ReviewsProps {
   productId: string;
 }
 
-// --- API CALLS ---
+// --- API CALLS (CORRECTED) ---
 const fetchReviews = async (productId: string) => {
-  const { data } = await api.get(`/api/reviews/${productId}`);
+  // THE FIX: The `/api` prefix has been removed. 
+  // Your central `api.ts` file handles this automatically.
+  const { data } = await api.get(`/reviews/${productId}`);
   return data as Review[];
 };
 
@@ -38,7 +40,8 @@ const uploadImage = async (file: File): Promise<string> => {
 };
 
 const postReview = async ({ productId, rating, comment, imageUrl }: { productId: string, rating: number, comment: string, imageUrl?: string }) => {
-    const { data } = await api.post('/api/reviews', { productId, rating, comment, imageUrl });
+    // THE FIX: The `/api` prefix has been removed here as well.
+    const { data } = await api.post('/reviews', { productId, rating, comment, imageUrl });
     return data;
 }
 
@@ -113,7 +116,6 @@ const ReviewCard = ({ review }: { review: Review }) => (
     </div>
     <p className="text-sm text-gray-700 flex-grow">{review.comment || 'No comment provided.'}</p>
     {review.imageUrl && (
-      // THE FIX: Added a safety check to the onClick handler
       <img src={review.imageUrl} alt="Review attachment" className="mt-3 rounded-lg max-h-48 w-auto cursor-pointer self-start" onClick={() => review.imageUrl && window.open(review.imageUrl, '_blank')}/>
     )}
   </div>
@@ -257,7 +259,6 @@ export default function Reviews({ productId }: ReviewsProps) {
     <div className="bg-background p-6 rounded-lg border">
       <h2 className="font-sans text-3xl font-bold mb-6 text-text-main">Reviews</h2>
       <div className="border-b pb-6 mb-6">
-        {/* THE FIX: Correctly pass the reviews array to the summary */}
         <RatingSummary reviews={reviews || []} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
