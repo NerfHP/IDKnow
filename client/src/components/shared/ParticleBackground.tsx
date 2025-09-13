@@ -239,7 +239,7 @@ const ParticleBackground: React.FC = () => {
             width: '100%',
             height: '100%',
             zIndex: -1, 
-            backgroundColor: '#FDFBF5'
+            backgroundColor: '#FDF4DC'
         }} 
     />
   );
