@@ -10,7 +10,7 @@ export default function TrackOrderPage() {
         title="Track Your Order"
         description="Check the status of your Siddhi Divine order by entering your order ID and email address."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-16">
           <Breadcrumbs 
             items={[

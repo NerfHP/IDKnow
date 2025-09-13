@@ -68,6 +68,18 @@ export interface ContentItem {
   packageContents?: string[];
 }
 
+export interface Review {
+  id: string;
+  rating: number;
+  comment: string | null;
+  imageUrl?: string | null;
+  createdAt: string;
+  user?: { // User can be optional if not always included
+    name: string;
+  };
+  product?: Partial<ContentItem>; // Product can be optional
+}
+
 export interface CartItem extends ContentItem {
   quantity: number;
 }

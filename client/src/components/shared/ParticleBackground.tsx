@@ -32,12 +32,19 @@ class Constellation {
     this.alpha = isInitiallyVisible ? 1 : 0;
     this.targetAlpha = this.alpha;
     
-    const scale = Math.min(canvasWidth, canvasHeight) * 0.2; // Adjusted scale for better grid fit
+    const scale = Math.min(canvasWidth, canvasHeight) * 0.25; // Made constellations larger
     this.stars = data.stars.map(s => ({
       x: s.x * scale,
       y: s.y * scale,
       size: Math.random() * 2 + 1
     }));
+  }
+
+  getRandomPosition(canvasWidth: number, canvasHeight: number) {
+    return {
+      x: Math.random() * canvasWidth * 0.8 + canvasWidth * 0.1,
+      y: Math.random() * canvasHeight * 0.8 + canvasHeight * 0.1
+    };
   }
 
   fadeIn() { this.targetAlpha = 1; }
@@ -98,53 +105,46 @@ const ParticleBackground: React.FC = () => {
     const init = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      const shuffledZodiacs = [...ZODIAC_CONSTELLATIONS].sort(() => 0.5 - Math.random());
       
-      const numToCreate = 12; // Create a full grid
-      const cols = 4;
-      const rows = 3;
+      const numVisible = 6;
+      const cols = 3;
+      const rows = 2;
       const cellWidth = canvas.width / cols;
       const cellHeight = canvas.height / rows;
 
-      let availableZodiacs = [...ZODIAC_CONSTELLATIONS];
-      constellations = [];
+      constellations = shuffledZodiacs.map((data, i) => {
+          const isVisible = i < numVisible;
+          let x, y;
 
-      for (let i = 0; i < numToCreate; i++) {
-          if (availableZodiacs.length === 0) {
-              availableZodiacs = [...ZODIAC_CONSTELLATIONS]; // Refill if we run out
+          if (isVisible) {
+              const col = i % cols;
+              const row = Math.floor(i / cols);
+              x = (col * cellWidth) + (cellWidth / 2) + (Math.random() - 0.5) * 50;
+              y = (row * cellHeight) + (cellHeight / 2) + (Math.random() - 0.5) * 50;
+          } else {
+              x = -1000; // Start hidden constellations off-screen
+              y = -1000;
           }
-          const zodiacIndex = Math.floor(Math.random() * availableZodiacs.length);
-          const data = availableZodiacs.splice(zodiacIndex, 1)[0];
-          
-          const col = i % cols;
-          const row = Math.floor(i / cols);
-          const x = (col * cellWidth) + (cellWidth / 2) + (Math.random() - 0.5) * 30;
-          const y = (row * cellHeight) + (cellHeight / 2) + (Math.random() - 0.5) * 30;
-
-          constellations.push(new Constellation(data, x, y, canvas.width, canvas.height, true));
-      }
+          return new Constellation(data, x, y, canvas.width, canvas.height, isVisible);
+      });
     };
 
-    const replaceConstellation = () => {
-      if (constellations.length === 0) return;
+    const swapConstellations = () => {
+      const visible = constellations.filter(c => c.targetAlpha === 1);
+      const hidden = constellations.filter(c => c.targetAlpha === 0);
 
-      const replacementIndex = Math.floor(Math.random() * constellations.length);
-      const oldConstellation = constellations[replacementIndex];
-      const oldData = oldConstellation.data;
-      
-      // Find a new, different zodiac sign
-      let newData = ZODIAC_CONSTELLATIONS[Math.floor(Math.random() * ZODIAC_CONSTELLATIONS.length)];
-      while (newData.name === oldData.name) {
-          newData = ZODIAC_CONSTELLATIONS[Math.floor(Math.random() * ZODIAC_CONSTELLATIONS.length)];
+      if (visible.length > 0 && hidden.length > 0) {
+        const toHide = visible[Math.floor(Math.random() * visible.length)];
+        const toShow = hidden[Math.floor(Math.random() * hidden.length)];
+        
+        const { x, y } = toShow.getRandomPosition(canvas.width, canvas.height);
+        toShow.x = x;
+        toShow.y = y;
+
+        toHide.fadeOut();
+        toShow.fadeIn();
       }
-
-      oldConstellation.fadeOut();
-
-      // After a delay for the fade-out, replace it with the new one
-      setTimeout(() => {
-        const newConstellation = new Constellation(newData, oldConstellation.x, oldConstellation.y, canvas.width, canvas.height, false);
-        constellations[replacementIndex] = newConstellation;
-        newConstellation.fadeIn();
-      }, 2000); // Wait for fade-out to be noticeable
     };
 
     const animate = () => {
@@ -162,7 +162,7 @@ const ParticleBackground: React.FC = () => {
 
     init();
     animate();
-    swapInterval = setInterval(replaceConstellation, 3000) as unknown as number; // Swap every 3 seconds
+    swapInterval = setInterval(swapConstellations, 4000) as unknown as number;
 
     window.addEventListener('resize', handleResize);
 

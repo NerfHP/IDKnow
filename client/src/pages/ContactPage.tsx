@@ -81,7 +81,7 @@ export default function ContactPage() {
                 id="message"
                 rows={4}
                 {...register('message')}
-                className={`mt-1 flex w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${errors.message ? 'border-red-500' : ''}`}
+                className={`mt-1 flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${errors.message ? 'border-red-500' : ''}`}
               />
               {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message.message}</p>}
             </div>

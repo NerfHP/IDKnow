@@ -39,7 +39,7 @@ export default function ServicesPage() {
         title="Spiritual Services"
         description="Book our authentic spiritual services, including pujas and astrology consultations, performed by experienced experts."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
           <div className="mt-4 text-center border-b pb-4">

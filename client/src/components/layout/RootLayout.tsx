@@ -1,30 +1,36 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search } from 'lucide-react';
-import CartDrawer from '../shared/CartDrawer'; // Import the CartDrawer
-import { ReactLenis } from 'lenis/react'; // Import Lenis
+import CartDrawer from '@/components/shared/CartDrawer';
+import { ReactLenis } from 'lenis/react';
+import ParticleBackground from '@/components/shared/ParticleBackground'; // Import the background
 
 export default function RootLayout() {
-  // State for both modals is now managed here
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <ReactLenis root options={{ lerp: 0.08 }}>
-      <div className="flex min-h-screen flex-col bg-transparent">
-        <Header
-          onSearchClick={() => setIsSearchOpen(true)}
-          onCartClick={() => setIsCartOpen(true)} // Pass the cart click handler
-        />
-        <main className="flex-grow">
-          <Outlet />
-        </main>
-        <Footer />
+      <div className="relative min-h-screen bg-transparent">
+        {/* This component will render the animated background behind everything else */}
+        <ParticleBackground />
 
-        {/* Search Modal */}
+        {/* Wrap main content in a relative div with z-index to ensure it's on top */}
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <Header
+            onSearchClick={() => setIsSearchOpen(true)}
+            onCartClick={() => setIsCartOpen(true)}
+          />
+          <main className="flex-grow">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+
+        {/* Search Modal and Cart Drawer will render on top due to their high z-index */}
         <AnimatePresence>
           {isSearchOpen && (
             <motion.div
@@ -38,7 +44,7 @@ export default function RootLayout() {
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -50, opacity: 0 }}
-                className="bg-white rounded-lg shadow-xl w-full max-w-2xl"
+                className="bg-white rounded-lg shadow-xl w-full max-w-2xl mt-20"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex border border-gray-200 rounded-lg overflow-hidden">
@@ -57,7 +63,6 @@ export default function RootLayout() {
           )}
         </AnimatePresence>
 
-        {/* Cart Drawer is now also rendered here */}
         <AnimatePresence>
           {isCartOpen && (
             <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
@@ -67,3 +72,4 @@ export default function RootLayout() {
     </ReactLenis>
   );
 }
+

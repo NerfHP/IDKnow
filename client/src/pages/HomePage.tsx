@@ -81,7 +81,7 @@ export default function HomePage() {
       
       <ShuffleHero/>
 
-      <div className="relative z-10 bg-background">
+      <div className="relative z-10 bg-transparent">
         <div className="py-16 space-y-20">
           
           {/* Featured Products Section (Your original, working code) */}

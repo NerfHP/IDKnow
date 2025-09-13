@@ -25,7 +25,7 @@ export default function BestsellersPage() {
         title="Best Sellers"
         description="Explore our most popular and highly-rated spiritual products, loved by our community."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Best Sellers' }]} />
           <div className="mt-4 text-center border-b pb-4">

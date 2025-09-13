@@ -8,7 +8,7 @@ export default function ShippingPolicyPage() {
         title="Shipping Policy"
         description="Find information about our shipping process, rates, delivery times, and international shipping options for Siddhi Divine products."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs 
             items={[

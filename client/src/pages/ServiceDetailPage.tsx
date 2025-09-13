@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
-import { ContentItem, Category } from '@/types';
+import { ContentItem } from '@/types';
 import Spinner from '@/components/shared/Spinner';
 import Breadcrumbs from '@/components/shared/Breadcrumbs';
 import SEO from '@/components/shared/SEO';
@@ -38,7 +38,7 @@ export default function ServiceDetailPage() {
   return (
     <>
       <SEO title={service.name} description={service.description} imageUrl={imageArray[0]} />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs 
             items={[

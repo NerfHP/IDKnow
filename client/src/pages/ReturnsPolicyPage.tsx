@@ -9,7 +9,7 @@ export default function ReturnsPolicyPage() {
         title="Returns & Exchanges Policy"
         description="Understand the returns and exchanges policy for Siddhi Divine. Our priority is your satisfaction with our spiritual products."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs 
             items={[

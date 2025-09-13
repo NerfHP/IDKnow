@@ -8,7 +8,7 @@ export default function TermsPage() {
         title="Terms and Conditions"
         description="Read the terms and conditions for using the Siddhi Divine website and purchasing our products and services."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs 
             items={[

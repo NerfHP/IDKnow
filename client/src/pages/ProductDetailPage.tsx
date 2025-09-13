@@ -86,7 +86,7 @@ export default function ProductDetailPage() {
   return (
     <>
       <SEO title={product.name} description={product.description} imageUrl={imageArray[0]} />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           {/* Your breadcrumbs will now be perfectly nested */}
           <Breadcrumbs items={breadcrumbItems} />

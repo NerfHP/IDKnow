@@ -30,7 +30,7 @@ export default function FaqsPage() {
         title="Frequently Asked Questions (FAQs)"
         description="Find answers to common questions about Siddhi Divine products, shipping, authenticity, and more."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-16">
           <Breadcrumbs 
             items={[

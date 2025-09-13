@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
         title="Privacy Policy"
         description="Learn how Siddhi Divine collects, uses, and protects your personal information when you use our website."
       />
-      <div className="bg-background">
+      <div className="bg-transparent">
         <div className="container mx-auto px-4 py-8">
           <Breadcrumbs 
             items={[
