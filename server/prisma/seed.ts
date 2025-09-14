@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+// Make sure your seed-content.json is in the correct path
 import seedContent from '../src/utils/seed-content.json';
 
 const prisma = new PrismaClient();
@@ -22,8 +23,8 @@ type SeedItem = {
     specifications?: Record<string, string>;
     benefits?: any[];
     variants?: any[];
-    howToUse?: any[]; // Added howToUse
-    packageContents?: string[]; // Added packageContents
+    howToUse?: any[];
+    packageContents?: string[];
 };
 
 type SeedCategory = {
@@ -56,9 +57,11 @@ async function createCategory(categoryData: SeedCategory, parentId: string | nul
 
 async function main() {
   console.log('Start seeding ...');
+  // Clear all data in the correct order
   await prisma.contentItem.deleteMany();
   await prisma.category.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.discount.deleteMany(); // Clear discounts as well
 
   const hashedPassword = await bcrypt.hash('Password123!', 10);
   await prisma.user.create({ data: { email: 'testuser@example.com', name: 'Test User', password: hashedPassword } });
@@ -95,6 +98,9 @@ async function main() {
           categories: {
             connect: [{ id: category.id }],
           },
+          // --- NEW DATA ADDED HERE ---
+          stock: 100, // Set a default stock of 100 for every item
+          isPublished: true, // Make all seeded items visible by default
         },
       });
     } else {
@@ -102,6 +108,35 @@ async function main() {
     }
   }
   console.log('Products created.');
+
+  // --- NEW: CREATING SAMPLE DISCOUNT CODES ---
+  console.log('Creating sample discount codes...');
+  await prisma.discount.create({
+    data: {
+        code: 'WELCOME10',
+        discountType: 'PERCENTAGE',
+        value: 10, // 10% off
+        isActive: true,
+    }
+  });
+  await prisma.discount.create({
+    data: {
+        code: 'DIWALI500',
+        discountType: 'FIXED_AMOUNT',
+        value: 500, // ₹500 off
+        isActive: true,
+    }
+  });
+  await prisma.discount.create({
+    data: {
+        code: 'EXPIREDCODE',
+        discountType: 'PERCENTAGE',
+        value: 15,
+        isActive: false, // This code is disabled
+    }
+  });
+  console.log('Sample discount codes created.');
+  
   console.log('Seeding finished.');
 }
 
