@@ -1,5 +1,5 @@
 import { CartItem, ContentItem } from '@/types';
-import { createContext, ReactNode, useState, useEffect } from 'react';
+import { createContext, ReactNode, useState, useEffect, useMemo } from 'react';
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -8,19 +8,18 @@ interface CartContextType {
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
   cartCount: number;
-  cartTotal: number;
+  // **UPGRADE**: Renamed cartTotal to subtotal for clarity
+  subtotal: number; 
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    // This initialization logic is now more robust
     try {
       const localData = localStorage.getItem('cart');
       if (localData) {
         const parsedData = JSON.parse(localData);
-        // We explicitly check if the parsed data is an array
         if (Array.isArray(parsedData)) {
           return parsedData;
         }
@@ -28,7 +27,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Failed to parse cart from localStorage", error);
     }
-    // If anything goes wrong, we fall back to an empty array
     return [];
   });
 
@@ -38,7 +36,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (item: ContentItem) => {
     setCartItems((prevItems) => {
-      // Ensure prevItems is always an array before spreading
       const currentItems = Array.isArray(prevItems) ? prevItems : [];
       const existingItem = currentItems.find((cartItem) => cartItem.id === item.id);
       if (existingItem) {
@@ -70,16 +67,28 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCartItems([]);
   };
 
-  // Ensure cartItems is an array before calling reduce
   const safeCartItems = Array.isArray(cartItems) ? cartItems : [];
-  const cartCount = safeCartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const cartTotal = safeCartItems.reduce((acc, item) => acc + (item.price || 0) * item.quantity, 0);
+  
+  // **UPGRADE**: useMemo efficiently recalculates values only when cartItems changes
+  const { cartCount, subtotal } = useMemo(() => {
+    const count = safeCartItems.reduce((acc, item) => acc + item.quantity, 0);
+    
+    // **THE FIX**: This now correctly uses salePrice if it exists, otherwise it uses the regular price.
+    const total = safeCartItems.reduce((acc, item) => {
+        const price = item.salePrice ?? item.price ?? 0;
+        return acc + (price * item.quantity);
+    }, 0);
+
+    return { cartCount: count, subtotal: total };
+  }, [safeCartItems]);
+
 
   return (
     <CartContext.Provider
-      value={{ cartItems: safeCartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal }}
+      value={{ cartItems: safeCartItems, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, subtotal }}
     >
       {children}
     </CartContext.Provider>
   );
 };
+
