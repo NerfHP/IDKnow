@@ -4,7 +4,6 @@ import contentRoutes from './content.routes';
 import formRoutes from './form.routes';
 import reviewRoutes from './review.routes';
 import searchRoute from './search.route';
-import orderRoute from './order.route'; // 1. Import the new order route
 
 const router = express.Router();
 
@@ -28,11 +27,6 @@ const defaultRoutes = [
   {
     path: '/search',
     route: searchRoute,
-  },
-  // 2. Add the new order route to the list
-  {
-    path: '/orders',
-    route: orderRoute,
   },
 ];
 
