@@ -1,10 +1,18 @@
 import app from './app';
+import cors from 'cors';
 import config from './config';
 import logger from './utils/logger';
 
 const server = app.listen(config.port, () => {
   logger.info(`Server listening on port ${config.port}`);
 });
+
+app.use(
+  cors({
+    origin: config.clientOrigin, // This uses the environment variable
+    credentials: true,
+  })
+);
 
 const exitHandler = () => {
   if (server) {
