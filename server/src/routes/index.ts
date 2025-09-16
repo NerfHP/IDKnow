@@ -4,6 +4,8 @@ import contentRoutes from './content.routes';
 import formRoutes from './form.routes';
 import reviewRoutes from './review.routes';
 import searchRoute from './search.route';
+import orderRoute from './order.route';
+import paymentRoute from './payment.route';
 
 const router = express.Router();
 
@@ -27,6 +29,14 @@ const defaultRoutes = [
   {
     path: '/search',
     route: searchRoute,
+  },
+  {
+    path: '/orders',
+    route: orderRoute,
+  },
+  {
+    path: '/payment',
+    route: paymentRoute,
   },
 ];
 

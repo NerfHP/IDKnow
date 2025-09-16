@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// --- Your existing User and Token models are unchanged ---
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -17,6 +16,7 @@ model User {
   updatedAt DateTime @updatedAt
   tokens    Token[]
   reviews   Review[]
+  orders    Order[] // **THE FIX**: Added relation back to orders
 }
 
 model Token {
@@ -30,7 +30,6 @@ model Token {
   createdAt   DateTime @default(now())
 }
 
-// --- Your existing Category model is unchanged ---
 model Category {
   id          String      @id @default(cuid())
   name        String
@@ -46,21 +45,19 @@ model Category {
   items       ContentItem[]
 }
 
-// --- UPDATED ContentItem model ---
 model ContentItem {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  description String
-  content     String?
-  price       Float?
-  salePrice   Float?   // This field for sales is already here! Perfect.
-  images      String
-  type        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  categories  Category[]
-
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String
+  content         String?
+  price           Float?
+  salePrice       Float?
+  images          String
+  type            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  categories      Category[]
   vendor          String?
   sku             String?
   availability    String?
@@ -71,36 +68,26 @@ model ContentItem {
   howToUse        String?
   packageContents String?
   reviews         Review[]
-
-  // --- NEW FEATURES ADDED HERE ---
-  
-  // **STOCK FEATURE**: 0 means "Out of Stock".
-  // When a product is purchased, you will decrease this number.
-  stock       Int      @default(0)
-
-  // **VISIBILITY FEATURE**: Allows you to hide products without deleting them.
-  isPublished Boolean  @default(true)
+  orderItems      OrderItem[] // **THE FIX**: Added relation back to order items
+  stock           Int      @default(0)
+  isPublished     Boolean  @default(true)
 }
 
-// --- Your existing FormSubmission model is unchanged ---
 model FormSubmission {
   id        String   @id @default(cuid())
   type      String
-  data      String // JSON string
+  data      String
   createdAt DateTime @default(now())
 }
 
-// --- Your existing Review model is unchanged ---
 model Review {
   id        String      @id @default(cuid())
   rating    Int
   comment   String?
   imageUrl  String?
   createdAt DateTime    @default(now())
-  
   productId String
   product   ContentItem @relation(fields: [productId], references: [id], onDelete: Cascade)
-  
   userId    String
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -108,18 +95,37 @@ model Review {
   @@index([userId])
 }
 
-// --- NEW Discount model ---
 model Discount {
   id           String    @id @default(cuid())
-  
-  // **DISCOUNT FEATURE**: The code customers will type in, e.g., "SUMMER20".
-  code         String    @unique 
-  
-  discountType String    // "PERCENTAGE" or "FIXED_AMOUNT"
-  value        Float     // The value of the discount (e.g., 20 for 20% or 500 for ₹500).
-  
-  expiresAt    DateTime? // Optional: make the code expire on a certain date.
-  isActive     Boolean   @default(true) // Easily turn codes on or off.
-  
+  code         String    @unique
+  discountType String
+  value        Float
+  expiresAt    DateTime?
+  isActive     Boolean   @default(true)
   createdAt    DateTime  @default(now())
 }
+
+model Order {
+  id              String      @id @default(cuid())
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  total           Float
+  status          String      @default("PENDING")
+  customerName    String
+  customerPhone   String
+  shippingAddress String
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String      @id @default(cuid())
+  quantity  Int
+  price     Float
+  orderId   String
+  order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   ContentItem @relation(fields: [productId], references: [id])
+}
+
