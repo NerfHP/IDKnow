@@ -37,11 +37,7 @@ async function getCategoryAncestry(categoryId: string | null): Promise<Category[
 // --- THIS FUNCTION IS THE FIX ---
 const getHighlightedReviews = async () => {
   console.log("[Backend Service] Fetching highlighted reviews...");
-  const reviews = await prisma.review.findMany({
-    // THE FIX: The strict `where` clause has been removed.
-    // This will now fetch ANY review to ensure the carousel has content.
-    // In the future, you can add back the filter for rating and images.
-    
+  const reviews = await prisma.review.findMany({ 
     include: {
       user: { select: { name: true } },
       product: { include: categoryHierarchyInclude },

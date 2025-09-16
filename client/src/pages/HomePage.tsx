@@ -7,14 +7,13 @@ import Alert from '@/components/shared/Alert';
 import Button from '@/components/shared/Button';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/shared/SEO';
-import { Gem, ShieldCheck, Globe, Zap } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import { useCart } from '@/hooks/useCart';
 import ShuffleHero from '@/components/ShuffleHero';
 import FaqAccordion from '@/components/shared/FaqAccordion';
-import TrustBadges from '@/components/shared/TrustBadges';
 import TestimonialCarousel from '@/components/shared/TestimonialCarousel';
+import TrustBadgeScroller from '@/components/shared/TrustBadgeScroller';
 
 // --- TYPE DEFINITIONS FOR OUR DATA ---
 interface FeaturedData {
@@ -134,32 +133,6 @@ export default function HomePage() {
               )
             )}
           </section>
-
-          {/* Trust Signals Section (Unchanged) */}
-          <section className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center border-t border-gray-200 pt-16">
-                  <div className="flex flex-col items-center">
-                      <ShieldCheck size={40} className="text-primary mb-3" />
-                      <h3 className="font-bold text-lg text-text-main">Lab-Certified Purity</h3>
-                      <p className="text-sm text-gray-600">Every Rudraksha and gemstone is 100% authentic and certified.</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                      <Zap size={40} className="text-primary mb-3" />
-                      <h3 className="font-bold text-lg text-text-main">Energized & Blessed</h3>
-                      <p className="text-sm text-gray-600">Our products are spiritually energized to unlock their full potential.</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                      <Globe size={40} className="text-primary mb-3" />
-                      <h3 className="font-bold text-lg text-text-main">Worldwide Shipping</h3>
-                      <p className="text-sm text-gray-600">We deliver spiritual wellness to your doorstep, wherever you are.</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                      <Gem size={40} className="text-primary mb-3" />
-                      <h3 className="font-bold text-lg text-text-main">Authentic Sourcing</h3>
-                      <p className="text-sm text-gray-600">Sourced directly from Nepal and Indonesia for the highest quality.</p>
-                  </div>
-              </div>
-          </section>
           
           {/* Our Services Section (Your original, working code) */}
           <section className="container mx-auto px-4">
@@ -234,7 +207,7 @@ export default function HomePage() {
           </section>
         </div>
       </div>
-      <TrustBadges />
+      <TrustBadgeScroller />
     </>
   );
 }

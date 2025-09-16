@@ -8,6 +8,8 @@ const getReviewsByProductId = catchAsync(async (req: Request, res: Response) => 
 });
 
 const createReview = catchAsync(async (req: Request, res: Response) => {
+
+  
   // In a real app, you would get userId from the authenticated user (req.user.id)
   const { productId, rating, comment, userId } = req.body; 
   const review = await reviewService.createReview(productId, userId, rating, comment);

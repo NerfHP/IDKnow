@@ -25,7 +25,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     const payload = jwt.verify(token, config.jwt.secret) as { sub: string };
     const user = await userService.getUserById(payload.sub);
 
-    if (!user) {
+    if (!user) { 
       return next(new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate'));
     }
 

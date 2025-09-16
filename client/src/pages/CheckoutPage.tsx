@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Truck, CheckCircle, Wallet, Lightbulb, LoaderCircle } from 'lucide-react';
+import { Lock, Truck, CheckCircle, Lightbulb, LoaderCircle } from 'lucide-react';
 import SEO from '../components/shared/SEO';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCart } from '../hooks/useCart';
