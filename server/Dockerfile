@@ -1,33 +1,39 @@
 # Stage 1: Build the application
-FROM node:20-alpine AS builder
-
+# This stage installs all dependencies (including dev) and compiles the TypeScript
+FROM node:20-slim AS builder
 WORKDIR /usr/src/app
 
+# Copy package files and install all dependencies
 COPY package*.json ./
 RUN npm install
 
+# Copy the rest of the source code
 COPY . .
 
 # Generate Prisma Client
-RUN npx prisma generate
+RUN npm exec prisma generate
 
-# Build TypeScript
+# Compile TypeScript to JavaScript
 RUN npm run build
 
-# Stage 2: Create the production image
-FROM node:20-alpine
 
+# Stage 2: Create the final production image
+# This stage creates a smaller, cleaner image for running the application
+FROM node:20-slim
 WORKDIR /usr/src/app
 
-# Only copy necessary files from the builder stage
-COPY --from=builder /usr/src/app/node_modules ./node_modules
-COPY --from=builder /usr/src/app/package*.json ./
+# Copy package files and install *only* production dependencies
+COPY package*.json ./
+RUN npm install --omit=dev
+
+# THE FIX IS HERE: Copy the compiled 'dist' folder from the 'builder' stage
 COPY --from=builder /usr/src/app/dist ./dist
-COPY --from=builder /usr/src/app/prisma ./prisma
 
-EXPOSE 4000
+# Copy the Prisma schema for the runtime
+COPY prisma ./prisma
 
-# Command to run the application
-# We will run migrations from docker-compose, but this is a good practice
-# CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
+# Expose the port your app runs on
+EXPOSE 10000
+
+# The command to start the application
 CMD ["npm", "run", "start"]
