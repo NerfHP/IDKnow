@@ -52,7 +52,7 @@ const DetailedTestimonialCard = ({ review, isActive }: { review: HighlightedRevi
                 </div>
                 <p className={`text-xs font-medium ${isActive ? 'text-indigo-200' : 'text-gray-400'}`}>{new Date(review.createdAt).toLocaleDateString()}</p>
             </div>
-            <p className="font-serif text-sm italic mb-3 flex-grow">"{review.comment}"</p>
+            <p className="font-sans text-sm italic mb-3 flex-grow">"{review.comment}"</p>
             <p className="font-bold text-xs text-right">- {review.user.name}</p>
         </div>
         <Link to={productLink} className={`mt-auto p-2 border-t transition-colors duration-300 ease-in-out rounded-b-2xl flex items-center gap-3 ${isActive ? 'border-indigo-500 hover:bg-indigo-700' : 'border-gray-200 hover:bg-gray-50'}`}>
