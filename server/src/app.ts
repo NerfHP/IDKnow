@@ -41,4 +41,13 @@ app.use(errorConverter);
 // Handle error
 app.use(errorHandler);
 
+// --- ADD THIS ROOT ROUTE ---
+// This route will handle requests to your base URL
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    message: 'Welcome to the Siddhidivine API!',
+    status: 'ok',
+  });
+});
+
 export default app;
