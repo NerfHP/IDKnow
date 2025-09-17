@@ -3,29 +3,25 @@ import cors from 'cors';
 import config from './config';
 import logger from './utils/logger';
 
-// --- CORRECT CORS CONFIGURATION ---
-// We get the allowed origins from an environment variable.
-// This should be a comma-separated string in your Render settings.
-// e.g., "https://siddhidivine.vercel.app,https://your-preview-url.vercel.app"
-const allowedOrigins = config.clientOrigin ? config.clientOrigin.split(',') : [];
+// --- ROBUST ORIGIN PARSING ---
+// This new version takes the string, splits it by the comma,
+// and then `.map(origin => origin.trim())` cleans up any whitespace or newlines from each URL.
+// This permanently fixes the '\n' bug.
+const allowedOrigins = config.clientOrigin
+  ? config.clientOrigin.split(',').map(origin => origin.trim())
+  : [];
 
-// More debugging
-console.log('Final allowedOrigins array:', allowedOrigins);
-console.log('------------------------------------');
 
-// For local development, we can add localhost to the list.
 if (process.env.NODE_ENV !== 'production') {
-    const localClient = 'http://localhost:3000'; // Or whatever port you use
+    const localClient = 'http://localhost:3000';
     if (!allowedOrigins.includes(localClient)) {
         allowedOrigins.push(localClient);
     }
 }
 
 const corsOptions = {
-    // The `origin` function checks if the incoming request URL is in our trusted list.
     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-        // We allow requests if their origin is in our `allowedOrigins` array,
-        // or if the request has no origin (like from Postman or a mobile app).
+        // This logic is perfect, no changes needed here.
         if (origin && allowedOrigins.includes(origin) || !origin) {
             callback(null, true);
         } else {
@@ -36,20 +32,13 @@ const corsOptions = {
     credentials: true,
 };
 
-// --- APPLY MIDDLEWARE ---
-// IMPORTANT: You MUST apply middleware like `cors` BEFORE starting the server.
-// This ensures every request is checked against your CORS policy.
 app.use(cors(corsOptions));
 
-
-// --- START SERVER ---
-// Now, we start the server AFTER the middleware is ready.
 const server = app.listen(config.port, () => {
   logger.info(`Server listening on port ${config.port}`);
 });
 
-
-// --- GRACEFUL SHUTDOWN LOGIC (No changes needed here) ---
+// --- Graceful shutdown logic remains the same ---
 const exitHandler = () => {
   if (server) {
     server.close(() => {
