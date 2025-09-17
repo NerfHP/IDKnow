@@ -3,6 +3,11 @@ import cors from 'cors';
 import config from './config';
 import logger from './utils/logger';
 
+// --- DIRECT ENVIRONMENT VARIABLE READ ---
+// We are bypassing `config.clientOrigin` and reading directly from the server's environment.
+// This is the most reliable way to ensure we get the value set on Render.
+const clientOriginString = process.env.CLIENT_ORIGIN || '';
+
 // --- ROBUST ORIGIN PARSING ---
 // This new version takes the string, splits it by the comma,
 // and then `.map(origin => origin.trim())` cleans up any whitespace or newlines from each URL.
@@ -26,6 +31,7 @@ const corsOptions = {
             callback(null, true);
         } else {
             logger.error(`CORS blocked for origin: ${origin}`);
+            logger.error(`Allowed origins are: [${allowedOrigins.join(', ')}]`);
             callback(new Error('This origin is not allowed by CORS'));
         }
     },
