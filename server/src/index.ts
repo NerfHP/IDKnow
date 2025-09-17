@@ -38,7 +38,7 @@ const corsOptions = {
     credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 const server = app.listen(config.port, () => {
   logger.info(`Server listening on port ${config.port}`);
