@@ -9,6 +9,10 @@ import logger from './utils/logger';
 // e.g., "https://siddhidivine.vercel.app,https://your-preview-url.vercel.app"
 const allowedOrigins = config.clientOrigin ? config.clientOrigin.split(',') : [];
 
+// More debugging
+console.log('Final allowedOrigins array:', allowedOrigins);
+console.log('------------------------------------');
+
 // For local development, we can add localhost to the list.
 if (process.env.NODE_ENV !== 'production') {
     const localClient = 'http://localhost:3000'; // Or whatever port you use
