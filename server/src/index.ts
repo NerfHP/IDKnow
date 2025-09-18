@@ -3,42 +3,24 @@ import config from './config';
 import logger from './utils/logger';
 import { Request, Response, NextFunction } from 'express';
 
-// --- CUSTOM CORS MIDDLEWARE (FINAL TEST) ---
-// This function will run on EVERY request that hits the server.
-const forceCorsMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  // Define the websites that are allowed to connect.
-  const allowedOrigins = [
-    'https://siddhidivine.vercel.app',
-    'https://siddhidivine-nqvfstgco-nerf-hps-projects.vercel.app'
-  ];
-
-  const origin = req.headers.origin;
-
-  // Check if the incoming request's origin is on our approved list.
-  if (origin && allowedOrigins.includes(origin)) {
-    // If it is, add the required header to the response.
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  // Define what methods and headers are allowed.
+// --- WILDCARD CORS MIDDLEWARE (FINAL TEST) ---
+// This is a special middleware for debugging.
+// It will add the CORS header with a "*" which means "allow everyone".
+const wildcardCorsMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  // We are setting the header to '*' for this test.
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-  // The browser sends an "OPTIONS" request before the real request (a "preflight" check).
-  // We need to respond to this preflight check with a "204 No Content" status.
   if (req.method === 'OPTIONS') {
     return res.sendStatus(204);
   }
 
-  // Pass the request along to the next part of your application (your routes).
   next();
 };
 
-// --- APPLY OUR CUSTOM MIDDLEWARE ---
-// We apply our custom CORS function to the entire app.
-// This is now the very first thing that will run.
-app.use(forceCorsMiddleware);
+// Apply our custom wildcard middleware to the entire app.
+app.use(wildcardCorsMiddleware);
 
 
 // --- START SERVER ---
